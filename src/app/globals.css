@@ -1,5 +1,20 @@
 @import "tailwindcss";
 
+@theme {
+  --color-poke-blue-100: #3466af;
+  --color-poke-blue-200: #21386e;
+  --color-poke-blue-300: #1d2c5e;
+  --color-poke-yellow-100: #ffcb05;
+  --color-poke-yellow-200: #c7a008;
+  --color-poke-white-100: #f3f6fb;
+  --color-poke-white-200: #ffffff;
+  --color-poke-gray-100: #808080;
+  --color-poke-green-100: #4dff68;
+  --color-poke-green-200: #005c14;
+  --color-poke-red-100: #ff5050;
+  --color-poke-red-200: #5c0000;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
