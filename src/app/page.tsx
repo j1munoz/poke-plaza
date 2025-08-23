@@ -1,11 +1,12 @@
 import Image from "next/image";
 import AutoplayCarousel from '../components/AutoplayCarousel';
+import RadioGroup from '../components/RadioGroup';
 import './globals.css';
 
 export default function Home() {
   return (
     <div className="font-sans min-h-screen flex flex-col items-center ">
-      
+
       {/* Navigation Bar */}
       <nav className="top-nav w-full text-white p-4 flex justify-between items-center">
         <div className="text-lg font-bold">Poke Plaza</div>
@@ -22,8 +23,8 @@ export default function Home() {
         <h2 className="text-xl mt-2 whitespace-nowrap">Explore cards from...</h2>
       </div>
 
-      <div className = "w-full">
-        <AutoplayCarousel/>
+      <div className="w-full">
+        <AutoplayCarousel />
       </div>
 
       <h1 className="text-3xl font-bold whitespace-nowrap m-8"> Welcome to Poke Plaza! Check out today's featured cards:</h1>
@@ -37,7 +38,7 @@ export default function Home() {
             className="flex-grow bg-transparent focus:outline-none px-2 text-gray-700 placeholder-gray-400"
           />
           <button className="bg-yellow-400 hover:bg-yellow-500 text-white rounded-full p-2 transition">
-            <i className="fa fa-search"></i>
+            <Image src="/search-icon.png" alt="Search" width={20} height={20} />
           </button>
         </div>
 
@@ -51,33 +52,30 @@ export default function Home() {
         </div>
 
         {/* Sort By Dropdown */}
-        <div className="dropdown flex ml-4 mb-8">
-          <button className="dropbtn whitespace-nowrap">Sort By ▼</button>
+      <div className="dropdown flex ml-4 mb-8">
+        <button className="dropbtn whitespace-nowrap">Sort By ▼</button>
+        <div className="dropdown-content text-white">
+          <RadioGroup
+            name="priceFilter"
+            title="Price"
+            options={[
+              { label: "High to Low", value: "high-to-low" },
+              { label: "Low to High", value: "low-to-high" },
+            ]}
+          />
 
-          <div className="dropdown-content text-white">
-            <p className="bg-[#21386E]"> Price </p>
-            <label className="flex items-center space-x-2 bg-[#1D2C5E]">
-              <input type="radio" name="priceFilter" value="high-to-low" className="form-radio text-blue-600" />
-              <span>High to Low</span>
-            </label>
-            <label className="flex items-center space-x-2 bg-[#1D2C5E]">
-              <input type="radio" name="priceFilter" value="low-to-high" className="form-radio text-blue-600" />
-              <span>Low to High</span>
-            </label>
-
-            <p className="bg-[#21386E]"> Date </p>
-            <label className="flex items-center space-x-2 bg-[#1D2C5E]">
-              <input type="radio" name="dateFilter" value="newest" className="form-radio text-blue-600" />
-              <span>Newest First</span>
-            </label>
-            <label className="flex items-center space-x-2 bg-[#1D2C5E]">
-              <input type="radio" name="dateFilter" value="oldest" className="form-radio text-blue-600" />
-              <span>Oldest First</span>
-            </label>
-          </div>
-          
+          <RadioGroup
+            name="dateFilter"
+            title="Date"
+            options={[
+              { label: "Newest First", value: "newest" },
+              { label: "Oldest First", value: "oldest" },
+            ]}
+          />
         </div>
-        
+
+        </div>
+
       </div>
 
 
@@ -112,17 +110,21 @@ export default function Home() {
           <div className="card-container">
             <img src="/klefki.jpg" alt="Card" className="rounded-t h-auto" />
             <h4>Klefki</h4>
-            <p className="text-center"><b>$99.99</b></p>
+            <p className="text-center">
+              <b>$99.99</b>
+            </p>
             <button className="button-5" role="button">View Listings</button>
           </div>
         </div>
 
       </div>
 
+      {/* Footer */}
+
       <nav className="flex items-center justify-center w-full text-center p-4 mt-8 border-t">
         <p>&copy; 2025 Poke Plaza. All rights reserved.</p>
       </nav>
-      
+
     </div>
   );
 }
