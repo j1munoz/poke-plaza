@@ -26,8 +26,138 @@ export default function Home() {
         <AutoplayCarousel/>
       </div>
 
-      <h1 className="m-4"> Welcome to Poke Plaza!</h1>
+      <h1 className="text-3xl font-bold whitespace-nowrap m-8"> Welcome to Poke Plaza! Check out today's featured cards:</h1>
+
+      {/* Search Bar & Filters*/}
+      <div className="flex items-center">
+        <div className="flex items-center bg-white rounded-full shadow-lg mb-8 px-4 py-2 w-full max-w-md">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="flex-grow bg-transparent focus:outline-none px-2 text-gray-700 placeholder-gray-400"
+          />
+          <button className="bg-yellow-400 hover:bg-yellow-500 text-white rounded-full p-2 transition">
+            <i className="fa fa-search"></i>
+          </button>
+        </div>
+
+        {/* Filter By Dropdown */}
+        <div className="dropdown flex ml-4 mb-8">
+          <button className="dropbtn whitespace-nowrap">Filter By ▼</button>
+          <div className="dropdown-content text-white">
+            <p className="bg-[#21386E]"> Energy Type </p>
+            <EnergyTypeRadios />
+          </div>
+        </div>
+
+        {/* Sort By Dropdown */}
+        <div className="dropdown flex ml-4 mb-8">
+          <button className="dropbtn whitespace-nowrap">Sort By ▼</button>
+
+          <div className="dropdown-content text-white">
+            <p className="bg-[#21386E]"> Price </p>
+            <label className="flex items-center space-x-2 bg-[#1D2C5E]">
+              <input type="radio" name="priceFilter" value="high-to-low" className="form-radio text-blue-600" />
+              <span>High to Low</span>
+            </label>
+            <label className="flex items-center space-x-2 bg-[#1D2C5E]">
+              <input type="radio" name="priceFilter" value="low-to-high" className="form-radio text-blue-600" />
+              <span>Low to High</span>
+            </label>
+
+            <p className="bg-[#21386E]"> Date </p>
+            <label className="flex items-center space-x-2 bg-[#1D2C5E]">
+              <input type="radio" name="dateFilter" value="newest" className="form-radio text-blue-600" />
+              <span>Newest First</span>
+            </label>
+            <label className="flex items-center space-x-2 bg-[#1D2C5E]">
+              <input type="radio" name="dateFilter" value="oldest" className="form-radio text-blue-600" />
+              <span>Oldest First</span>
+            </label>
+          </div>
+          
+        </div>
+        
+      </div>
+
+
+      {/* Card Section 
       
+      Should be replaced with dynamic content from database in the future, currently hardcoded for layout purposes.
+      using .map? I think?
+      
+      */}
+
+      <div className="grid gap-6 flex justify-center" style={{ gridTemplateColumns: "repeat(3, 350px)" }}>
+
+        <div className="card">
+          <div className="card-container">
+            <img src="/klefki.jpg" alt="Card" className="rounded-t h-auto" />
+            <h4>Klefki</h4>
+            <p className="text-center"><b>$99.99</b></p>
+            <button className="button-5" role="button">View Listings</button>
+          </div>
+        </div>
+
+        <div className="card">
+          <div className="card-container">
+            <img src="/klefki.jpg" alt="Card" className="rounded-t h-auto" />
+            <h4>Klefki</h4>
+            <p className="text-center"><b>$99.99</b></p>
+            <button className="button-5" role="button">View Listings</button>
+          </div>
+        </div>
+
+        <div className="card">
+          <div className="card-container">
+            <img src="/klefki.jpg" alt="Card" className="rounded-t h-auto" />
+            <h4>Klefki</h4>
+            <p className="text-center"><b>$99.99</b></p>
+            <button className="button-5" role="button">View Listings</button>
+          </div>
+        </div>
+
+      </div>
+
+      <nav className="flex items-center justify-center w-full text-center p-4 mt-8 border-t">
+        <p>&copy; 2025 Poke Plaza. All rights reserved.</p>
+      </nav>
+      
+    </div>
+  );
+}
+
+function EnergyTypeRadios() {
+  const energyTypes = [
+    "Grass",
+    "Fire",
+    "Water",
+    "Lightning",
+    "Psychic",
+    "Fighting",
+    "Darkness",
+    "Metal",
+    "Fairy",
+    "Dragon",
+    "Colorless",
+  ];
+
+  return (
+    <div>
+      {energyTypes.map((type) => (
+        <label
+          key={type}
+          className="flex items-center space-x-2 bg-[#1D2C5E]"
+        >
+          <input
+            type="radio"
+            name="typeFilter"
+            value={type.toLowerCase()}
+            className="form-radio text-blue-600"
+          />
+          <span className="text-white">{type}</span>
+        </label>
+      ))}
     </div>
   );
 }
