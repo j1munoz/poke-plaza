@@ -7,16 +7,6 @@ export default function Home() {
   return (
     <div className="font-sans min-h-screen flex flex-col items-center ">
 
-      {/* Navigation Bar */}
-      <nav className="top-nav w-full text-white p-4 flex justify-between items-center">
-        <div className="text-lg font-bold">Poke Plaza</div>
-        <div className="flex space-x-4">
-          <a href="#home" className="hover:underline">Home</a>
-          <a href="#about" className="hover:underline">Account Settings</a>
-          <a href="#contact" className="hover:underline">Sign In</a>
-        </div>
-      </nav>
-
       {/* Carousel */}
       <div className="text-center bg-[#FFCB05] w-full">
         <h1 className="text-3xl mt-8 font-bold whitespace-nowrap">Buy, Sell and Trade Your Cards!</h1>
@@ -119,11 +109,7 @@ export default function Home() {
 
       </div>
 
-      {/* Footer */}
-
-      <nav className="flex items-center justify-center w-full text-center p-4 mt-8 border-t">
-        <p>&copy; 2025 Poke Plaza. All rights reserved.</p>
-      </nav>
+      
 
     </div>
   );
