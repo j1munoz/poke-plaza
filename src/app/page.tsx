@@ -1,23 +1,29 @@
 import Image from "next/image";
-import AutoplayCarousel from '../components/AutoplayCarousel';
-import RadioGroup from '../components/RadioGroup';
-import './globals.css';
+import AutoplayCarousel from "../components/AutoplayCarousel";
+import RadioGroup from "../components/RadioGroup";
+import "./globals.css";
 
 export default function Home() {
   return (
     <div className="font-sans min-h-screen flex flex-col items-center ">
-
       {/* Carousel */}
       <div className="text-center bg-[#FFCB05] w-full">
-        <h1 className="text-3xl mt-8 font-bold whitespace-nowrap">Buy, Sell and Trade Your Cards!</h1>
-        <h2 className="text-xl mt-2 whitespace-nowrap">Explore cards from...</h2>
+        <h1 className="text-3xl mt-8 font-bold whitespace-nowrap">
+          Buy, Sell and Trade Your Cards!
+        </h1>
+        <h2 className="text-xl mt-2 whitespace-nowrap">
+          Explore cards from...
+        </h2>
       </div>
 
       <div className="w-full">
         <AutoplayCarousel />
       </div>
 
-      <h1 className="text-3xl font-bold whitespace-nowrap m-8"> Welcome to Poke Plaza! Check out today's featured cards:</h1>
+      <h1 className="text-3xl font-bold whitespace-nowrap m-8">
+        {" "}
+        Welcome to Poke Plaza! Check out today&apos;s featured cards:
+      </h1>
 
       {/* Search Bar & Filters*/}
       <div className="flex items-center">
@@ -42,32 +48,29 @@ export default function Home() {
         </div>
 
         {/* Sort By Dropdown */}
-      <div className="dropdown flex ml-4 mb-8">
-        <button className="dropbtn whitespace-nowrap">Sort By ▼</button>
-        <div className="dropdown-content text-white">
-          <RadioGroup
-            name="priceFilter"
-            title="Price"
-            options={[
-              { label: "High to Low", value: "high-to-low" },
-              { label: "Low to High", value: "low-to-high" },
-            ]}
-          />
+        <div className="dropdown flex ml-4 mb-8">
+          <button className="dropbtn whitespace-nowrap">Sort By ▼</button>
+          <div className="dropdown-content text-white">
+            <RadioGroup
+              name="priceFilter"
+              title="Price"
+              options={[
+                { label: "High to Low", value: "high-to-low" },
+                { label: "Low to High", value: "low-to-high" },
+              ]}
+            />
 
-          <RadioGroup
-            name="dateFilter"
-            title="Date"
-            options={[
-              { label: "Newest First", value: "newest" },
-              { label: "Oldest First", value: "oldest" },
-            ]}
-          />
+            <RadioGroup
+              name="dateFilter"
+              title="Date"
+              options={[
+                { label: "Newest First", value: "newest" },
+                { label: "Oldest First", value: "oldest" },
+              ]}
+            />
+          </div>
         </div>
-
-        </div>
-
       </div>
-
 
       {/* Card Section 
       
@@ -76,41 +79,67 @@ export default function Home() {
       
       */}
 
-      <div className="grid gap-6 flex justify-center" style={{ gridTemplateColumns: "repeat(3, 350px)" }}>
-
+      <div
+        className="grid gap-6 justify-center"
+        style={{ gridTemplateColumns: "repeat(3, 350px)" }}
+      >
         <div className="card">
           <div className="card-container">
-            <img src="/klefki.jpg" alt="Card" className="rounded-t h-auto" />
-            <h4>Klefki</h4>
-            <p className="text-center"><b>$99.99</b></p>
-            <button className="button-5" role="button">View Listings</button>
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="card-container">
-            <img src="/klefki.jpg" alt="Card" className="rounded-t h-auto" />
-            <h4>Klefki</h4>
-            <p className="text-center"><b>$99.99</b></p>
-            <button className="button-5" role="button">View Listings</button>
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="card-container">
-            <img src="/klefki.jpg" alt="Card" className="rounded-t h-auto" />
+            <Image
+              src="/klefki.jpg"
+              alt="Card"
+              width={600}
+              height={600}
+              className="rounded-t h-auto"
+            />
             <h4>Klefki</h4>
             <p className="text-center">
               <b>$99.99</b>
             </p>
-            <button className="button-5" role="button">View Listings</button>
+            <button className="button-5" role="button">
+              View Listings
+            </button>
           </div>
         </div>
 
+        <div className="card">
+          <div className="card-container">
+            <Image
+              src="/klefki.jpg"
+              alt="Card"
+              width={600}
+              height={600}
+              className="rounded-t h-auto"
+            />
+            <h4>Klefki</h4>
+            <p className="text-center">
+              <b>$99.99</b>
+            </p>
+            <button className="button-5" role="button">
+              View Listings
+            </button>
+          </div>
+        </div>
+
+        <div className="card">
+          <div className="card-container">
+            <Image
+              src="/klefki.jpg"
+              alt="Card"
+              width={600}
+              height={600}
+              className="rounded-t h-auto"
+            />
+            <h4>Klefki</h4>
+            <p className="text-center">
+              <b>$99.99</b>
+            </p>
+            <button className="button-5" role="button">
+              View Listings
+            </button>
+          </div>
+        </div>
       </div>
-
-      
-
     </div>
   );
 }
@@ -133,10 +162,7 @@ function EnergyTypeRadios() {
   return (
     <div>
       {energyTypes.map((type) => (
-        <label
-          key={type}
-          className="flex items-center space-x-2 bg-[#1D2C5E]"
-        >
+        <label key={type} className="flex items-center space-x-2 bg-[#1D2C5E]">
           <input
             type="radio"
             name="typeFilter"

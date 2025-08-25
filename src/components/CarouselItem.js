@@ -1,9 +1,9 @@
-import React from "react";
+import Image from "next/image";
 
 export default function CarouselItem({ imgUrl, imgTitle }) {
   return (
     <div className="carousel-card">
-      <img src={imgUrl} alt={imgTitle}></img>
+      <Image src={imgUrl} alt={imgTitle} height={500} width={500} />
     </div>
   );
 }

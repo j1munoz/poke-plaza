@@ -16,7 +16,7 @@ export default function AutoplayCarousel() {
             imgTitle={cardDetails[detailKey].title}
           />
         ))}
-        
+
         {Object.keys(cardDetails).map((detailKey) => (
           <CarouselItem
             key={`second-${detailKey}`}
