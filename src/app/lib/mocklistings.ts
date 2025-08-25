@@ -28,7 +28,7 @@ export const listingsData: Record<string, CardData> = {
         user: "Alice",
         condition: "Mint",
         price: "99.99",
-        description: "Rare Klefki in mint condition.",
+        description: "Rare Klefki in mint condition. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         image: "/klefki.jpg",
       },
       {

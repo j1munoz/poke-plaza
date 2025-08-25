@@ -16,7 +16,7 @@ export default function ItemListingsPage({ params }: { params: { item: string } 
   const { title, listings, cardnumber, releasedate, set } = itemData;
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center p-6">
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center p-6 ml-40 mr-40">
       {/* Title */}
       <h1 className="text-4xl font-bold mb-8">{title}</h1>
 

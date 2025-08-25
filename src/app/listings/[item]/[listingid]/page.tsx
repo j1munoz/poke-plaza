@@ -1,4 +1,5 @@
 import { listingsData } from '../../../lib/mocklistings';
+import Link from 'next/link';
 
 type PageProps = {
   params: {
@@ -17,7 +18,7 @@ export default function ListingDetailPage({ params }: PageProps) {
     return <p>No listings found for category: {itemCategory}</p>;
   }
 
-  const { title, listings } = itemData;
+  const { title, listings, cardnumber, releasedate, set } = itemData;
 
   const listing = listings.find((l) => l.id === listingId);
 
@@ -25,20 +26,41 @@ export default function ListingDetailPage({ params }: PageProps) {
     return <p>Listing not found: {listingId}</p>;
   }
 
+
   return (
-    <div className="p-8 max-w-xl mx-auto">
-      <img src={listing.image} alt={title} className="mb-4 rounded" />
-      <h1 className="text-2xl font-bold">
-        {title} — Listed by {listing.user}
-      </h1>
-      <p className="text-gray-700 mt-2">{listing.description}</p>
-      <p className="text-lg font-semibold mt-4">
-        Condition: {listing.condition}
-      </p>
-      <p className="text-lg font-semibold mt-1">Price: {listing.price}</p>
-      <button className="mt-6 bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded">
-        Buy Now
-      </button>
+  <div className="min-h-screen bg-gray-100 flex flex-col p-6">
+    {/* Title */}
+    <h1 className="text-4xl font-bold mb-8 text-center">{title}</h1>
+
+    {/* Content */}
+    <div className="flex flex-col md:flex-row gap-8 w-full max-w-screen-xl mx-auto">
+      {/* Left: Card Image & Info */}
+      <div className="bg-white shadow rounded-lg p-4 w-full md:w-1/3">
+        <img src={listing.image} alt={title} className="mb-4 rounded w-full" />
+        <div className="text-center mt-4">
+          <p className="text-3xl">${listing.price}</p>
+          <p className="text-gray-800 ">#{cardnumber}</p>
+          <p className="text-gray-600">{set}</p>
+          <p className="text-gray-500">Released on {releasedate}</p>
+        </div>
+      </div>
+
+      {/* Right: Listing Description */}
+      <div className="flex flex-col gap-4 w-full md:w-2/3">
+        <p className="mt-4">
+          Sold by {listing.user} <br /><br />
+          Card Condition: {listing.condition} <br /><br />
+          Description:
+        </p>
+
+        <blockquote className='ml-5 mr-5'> {listing.description} </blockquote>
+
+        <button className="mt-6 bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded w-full">
+          Buy Now
+        </button>
+
+      </div>
     </div>
-  );
+  </div>
+);
 }
