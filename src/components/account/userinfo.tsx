@@ -21,7 +21,7 @@ const UserInfo = ({
   reliable,
 }: UserInfoProps) => {
   return (
-    <div className="flex justify-between gap-20 border-b-2 p-5 w-[30vw] border-black">
+    <div className="flex justify-between gap-20 border-b-2 p-5 w-[33vw] border-black">
       <div className="flex flex-col gap-5 items-center">
         <Image src={icon} alt="Icon" className="h-[10vh]" />
         <p className="text-3xl">{username}</p>
