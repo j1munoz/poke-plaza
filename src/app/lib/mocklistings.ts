@@ -1,7 +1,22 @@
 import { release } from "os";
 
-// src/app/lib/mocklistings.ts
-export const listingsData = {
+type CardData = {
+  title: string;
+  cardnumber: string;
+  releasedate: string;
+  set: string;
+  listings: {
+    id: string;
+    user: string;
+    condition: string;
+    price: string;
+    description: string;
+    image: string;
+  }[];
+};
+
+
+export const listingsData: Record<string, CardData> = {
   klefki: {
     title: "Klefki", 
     cardnumber: "186",
@@ -26,8 +41,12 @@ export const listingsData = {
       },
     ],
   },
+
   pikachu: {
     title: "Pikachu",
+    cardnumber: "999",
+    releasedate: "February 22, 2003",
+    set: "Testing Set",
     listings: [
       {
         id: "charlie-001",
