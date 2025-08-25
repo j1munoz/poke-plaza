@@ -1,21 +1,49 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Form from "@/components/forms/form/form";
-import { ATTRIBUTES, FIELDS, buttonMessage } from "@/data/form/signin";
+// import { ATTRIBUTES, FIELDS, buttonMessage } from "@/data/form/signin";
 import Link from "next/link";
 
-const SignIn = () => {
-  const [info, setInfo] = useState({ ...ATTRIBUTES });
-  const [loading, setLoading] = useState(false);
-  const [state, setState] = useState(0);
+type SigninInfo = { email: string; password: string };
 
-  const onSubmit = async () =>
-    // setLoading: (value: boolean) => void,
-    // setState: (value: number) => void,
-    {
-      console.log("Form submitted:", info, state);
-    };
+export default function SignIn() {
+  const router = useRouter();
+  const [info, setInfo] = useState<SigninInfo>({ email: "", password: "" });
+  const [, setState] = useState<number>(0); // omit the unused value
+  const [loading, setLoading] = useState(false);
+
+  const onSubmit = async () => {
+    setLoading(true);
+    setState(0);
+    try {
+      const payload: SigninInfo = {
+        email: info.email.trim(),
+        password: info.password.trim(),
+      };
+
+      const res = await fetch("/api/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const isJSON = res.headers
+        .get("content-type")
+        ?.includes("application/json");
+      const data = isJSON ? await res.json() : null;
+
+      if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
+
+      setState(1);
+      router.push(data?.redirect ?? "/");
+    } catch {
+      setState(-1);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center gap-5">
@@ -40,6 +68,4 @@ const SignIn = () => {
       </p>
     </div>
   );
-};
-
-export default SignIn;
+}
