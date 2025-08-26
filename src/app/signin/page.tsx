@@ -1,4 +1,3 @@
-
 //src/app/signin/page.tsx
 
 "use client";
@@ -65,7 +64,11 @@ export default function SignInPage() {
           required
         />
         {error && <p className="text-sm text-red-600">{error}</p>}
-        <button type="submit" disabled={loading} className="w-full rounded-lg bg-black px-4 py-2 text-white">
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full rounded-lg bg-black px-4 py-2 text-white"
+        >
           {loading ? "Signing in..." : "Sign in"}
         </button>
       </form>

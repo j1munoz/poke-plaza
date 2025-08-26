@@ -14,12 +14,17 @@ type Body = { email?: string; password?: string; name?: string };
 export async function POST(req: Request): Promise<Response> {
   try {
     const body = (await req.json().catch(() => ({}))) as Body;
-    const email = String(body.email ?? "").toLowerCase().trim();
+    const email = String(body.email ?? "")
+      .toLowerCase()
+      .trim();
     const password = String(body.password ?? "");
     const name = body.name ? String(body.name).trim() : undefined;
 
     if (!email || !password) {
-      return NextResponse.json({ error: "Missing fields: email, password" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Missing fields: email, password" },
+        { status: 400 },
+      );
     }
 
     const db = await getDb();
@@ -27,7 +32,10 @@ export async function POST(req: Request): Promise<Response> {
 
     const exists = await users.findOne({ email });
     if (exists) {
-      return NextResponse.json({ error: "Email already in use" }, { status: 409 });
+      return NextResponse.json(
+        { error: "Email already in use" },
+        { status: 409 },
+      );
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
@@ -38,7 +46,10 @@ export async function POST(req: Request): Promise<Response> {
       createdAt: new Date(),
     });
 
-    return NextResponse.json({ ok: true, redirect: "/signin" }, { status: 201 });
+    return NextResponse.json(
+      { ok: true, redirect: "/signin" },
+      { status: 201 },
+    );
   } catch {
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
@@ -50,7 +61,6 @@ export async function POST(req: Request): Promise<Response> {
 
 // import { handlers } from "@/auth";
 // export const { GET, POST } = handlers;
-
 
 // export async function POST(req: Request) {
 //   try {
