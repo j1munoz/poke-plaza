@@ -8,7 +8,8 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="font-sans min-h-screen flex flex-col items-center ">
+    
+    <div className="font-sans min-h-screen flex flex-col items-center w-full ">
       {/* Carousel */}
       <div className="text-center bg-[#FFCB05] w-full">
         <h1 className="text-3xl mt-8 font-bold whitespace-nowrap">
@@ -119,5 +120,7 @@ export default function Home() {
         </div>
       </div>
     </div>
+
+    
   );
 }
