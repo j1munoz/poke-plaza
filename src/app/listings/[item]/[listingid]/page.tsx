@@ -1,5 +1,4 @@
 import { listingsData } from "../../../lib/mocklistings";
-import Link from "next/link";
 
 type PageProps = {
   params: Promise<{
