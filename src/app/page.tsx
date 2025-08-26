@@ -8,7 +8,6 @@ import SellerCard from "@/components/account/sellercard";
 
 export default function Home() {
   return (
-    
     <div className="font-sans min-h-screen flex flex-col items-center w-full ">
       {/* Carousel */}
       <div className="text-center bg-[#FFCB05] w-full text-white">
@@ -127,7 +126,5 @@ export default function Home() {
         inStock={true}
       />
     </div>
-
-    
   );
 }
