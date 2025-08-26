@@ -5,7 +5,7 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 
 import clientPromise, { getDb } from "@/lib/mongo";
 import bcrypt from "bcryptjs";
