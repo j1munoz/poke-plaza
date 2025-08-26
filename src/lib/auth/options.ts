@@ -31,7 +31,7 @@ interface AccountDoc {
   session_state?: string | null;
 }
 
-const adapter = MongoDBAdapter(clientPromise, {
+const adapter = MongoDBAdapter(clientPromise(), {
   databaseName: process.env.MONGODB_DB,
 });
 

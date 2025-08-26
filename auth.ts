@@ -20,7 +20,7 @@ interface UserDoc {
 }
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: MongoDBAdapter(clientPromise, {
+  adapter: MongoDBAdapter(clientPromise(), {
     databaseName: process.env.MONGODB_DB,
   }),
   session: { strategy: "jwt" },
