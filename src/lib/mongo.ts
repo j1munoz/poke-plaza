@@ -5,7 +5,6 @@ let _clientPromise: Promise<MongoClient> | null = null;
 let _db: Db | null = null;
 
 function getClient(): Promise<MongoClient> {
-  // read env *inside* the function, not at module top
   const uri = process.env.MONGODB_URI;
   if (!uri) {
     throw new Error("MONGODB_URI is not set");
@@ -27,7 +26,7 @@ export async function getDb(): Promise<Db> {
   return db;
 }
 
-export default getClient; // if you still import the client elsewhere
+export default getClient;
 // import { MongoClient, Db } from "mongodb";
 
 // const uri = process.env.MONGODB_URI!;
