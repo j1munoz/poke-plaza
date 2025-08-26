@@ -4,32 +4,26 @@
 //The server-side endpoint your form hits. If this breaks, the client sees 400/409/500.
 
 import { NextResponse } from "next/server";
-import { z } from "zod";
-import bcrypt from "bcryptjs";
 import { dbConnect } from "@/lib/db";
-import User from "@/models/User";
+import bcrypt from "bcryptjs";
 
-const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6),
-});
-
-export async function POST(request: Request): Promise<Response> {
+export async function POST(req: Request) {
   try {
-    const body = await request.json().catch(() => ({}));
-    const parsed = schema.safeParse(body);
-    if (!parsed.success) {
+    const body = await req.json().catch(() => ({}));
+    const email = (body?.email ?? "").toLowerCase().trim();
+    const password = body?.password ?? "";
+
+    if (!email || !password) {
       return NextResponse.json(
-        { error: "Missing or invalid fields" },
+        { error: "Missing fields: email, password" },
         { status: 400 },
       );
     }
 
-    const { email, password } = parsed.data;
+    const db = await dbConnect();
+    const users = db.collection("users");
 
-    await dbConnect();
-
-    const existing = await User.findOne({ email }).lean().exec();
+    const existing = await users.findOne({ email });
     if (existing) {
       return NextResponse.json(
         { error: "Email already in use" },
@@ -37,11 +31,26 @@ export async function POST(request: Request): Promise<Response> {
       );
     }
 
-    const hashed = await bcrypt.hash(password, 10);
-    await User.create({ email, password: hashed });
+    const passwordHash = await bcrypt.hash(password, 10);
+    await users.insertOne({
+      email,
+      passwordHash,
+      createdAt: new Date(),
+    });
 
-    return NextResponse.json({ redirect: "/signin" }, { status: 201 });
-  } catch {
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+    return NextResponse.json(
+      { ok: true, redirect: "/signin" },
+      { status: 201 },
+    );
+  } catch (err: any) {
+    if (err?.code === 11000) {
+      return NextResponse.json(
+        { error: "Email already in use" },
+        { status: 409 },
+      );
+    }
+
+    console.error("Signup error:", err);
+    return NextResponse.json({ error: "Internal error" }, { status: 500 });
   }
 }
