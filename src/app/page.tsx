@@ -1,13 +1,16 @@
 import Image from "next/image";
 import AutoplayCarousel from "../components/AutoplayCarousel";
-import RadioGroup from "../components/RadioGroup";
+import FilterMenu from "@/components/FilterDrop";
+import SortMenu from "@/components/SortDrop";
 import "./globals.css";
+import Link from "next/link";
+import SellerCard from "@/components/account/sellercard";
 
 export default function Home() {
   return (
-    <div className="font-sans min-h-screen flex flex-col items-center ">
+    <div className="font-sans min-h-screen flex flex-col items-center w-full ">
       {/* Carousel */}
-      <div className="text-center bg-[#FFCB05] w-full">
+      <div className="text-center bg-[#FFCB05] w-full text-black">
         <h1 className="text-3xl mt-8 font-bold whitespace-nowrap">
           Buy, Sell and Trade Your Cards!
         </h1>
@@ -20,7 +23,7 @@ export default function Home() {
         <AutoplayCarousel />
       </div>
 
-      <h1 className="text-3xl font-bold whitespace-nowrap m-8">
+      <h1 className="text-3xl font-bold  whitespace-nowrap m-8 text-black">
         {" "}
         Welcome to Poke Plaza! Check out today&apos;s featured cards:
       </h1>
@@ -38,38 +41,9 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Filter By Dropdown */}
-        <div className="dropdown flex ml-4 mb-8">
-          <button className="dropbtn whitespace-nowrap">Filter By ▼</button>
-          <div className="dropdown-content text-white">
-            <p className="bg-[#21386E]"> Energy Type </p>
-            <EnergyTypeRadios />
-          </div>
-        </div>
+        <FilterMenu filterType={"energy"} />
 
-        {/* Sort By Dropdown */}
-        <div className="dropdown flex ml-4 mb-8">
-          <button className="dropbtn whitespace-nowrap">Sort By ▼</button>
-          <div className="dropdown-content text-white">
-            <RadioGroup
-              name="priceFilter"
-              title="Price"
-              options={[
-                { label: "High to Low", value: "high-to-low" },
-                { label: "Low to High", value: "low-to-high" },
-              ]}
-            />
-
-            <RadioGroup
-              name="dateFilter"
-              title="Date"
-              options={[
-                { label: "Newest First", value: "newest" },
-                { label: "Oldest First", value: "oldest" },
-              ]}
-            />
-          </div>
-        </div>
+        <SortMenu />
       </div>
 
       {/* Card Section 
@@ -96,9 +70,13 @@ export default function Home() {
             <p className="text-center">
               <b>$99.99</b>
             </p>
-            <button className="button-5" role="button">
-              View Listings
-            </button>
+            <Link href="/listings/klefki" passHref>
+              {" "}
+              {/* Example link to listings page */}
+              <button className="button-5" role="button">
+                View Listings
+              </button>
+            </Link>
           </div>
         </div>
 
@@ -140,38 +118,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-function EnergyTypeRadios() {
-  const energyTypes = [
-    "Grass",
-    "Fire",
-    "Water",
-    "Lightning",
-    "Psychic",
-    "Fighting",
-    "Darkness",
-    "Metal",
-    "Fairy",
-    "Dragon",
-    "Colorless",
-  ];
-
-  return (
-    <div>
-      {energyTypes.map((type) => (
-        <label key={type} className="flex items-center space-x-2 bg-[#1D2C5E]">
-          <input
-            type="radio"
-            name="typeFilter"
-            value={type.toLowerCase()}
-            className="form-radio text-blue-600"
-          />
-          <span className="text-white">{type}</span>
-        </label>
-      ))}
     </div>
   );
 }

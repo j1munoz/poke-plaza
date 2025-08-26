@@ -26,6 +26,32 @@ export type TextInput = InputField & {
   type: string;
 };
 
-export type Field = Heading | SubHeading | TextInput;
+export type TextAreaInput = InputField & {
+  input: "textarea";
+  name: string;
+  rows: number;
+  title: string;
+  placeholder: string;
+};
+
+export type SelectOption = {
+  label: string;
+  value: string;
+};
+
+export type SelectInput = InputField & {
+  input: "select";
+  name: string;
+  title: string;
+  options: SelectOption[];
+  placeholder: string;
+};
+
+export type Field =
+  | Heading
+  | SubHeading
+  | TextInput
+  | TextAreaInput
+  | SelectInput;
 
 export type BaseFields = Record<string, Field>;
