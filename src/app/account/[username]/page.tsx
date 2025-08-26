@@ -33,7 +33,7 @@ export default function AccountPage() {
       {/* Tab Content */}
       <div className="mt-6 w-[33vw]">
         {tab === "listings" && (
-          <div className="flex flex-col gap-6"> 
+          <div className="flex flex-col gap-6 ml-20 mr-20"> 
             {mockUser.uploadedListingIds.length > 0 ? (
               mockUser.uploadedListingIds.map((uploadedListing, index) => {
 
@@ -90,7 +90,7 @@ export default function AccountPage() {
                     </div>
                   </div>
                   <div className="flex-1">
-                    <div className="flex items-center gap-4 text-sm font-semibold text-gray-700">
+                    <div className="flex items-center gap-4 text-sm font-semibold text-gray-900">
                       <div className="flex items-center gap-1">
                         <p>Responsive</p>
                         <div className="flex">
@@ -133,7 +133,7 @@ export default function AccountPage() {
                     </div>
                     <p className="text-sm text-gray-500 mt-2">
                       Review by {review.username}
-                      <span className="mx-2">·</span>
+                      <span className="mx-4"></span>
                       {review.reviewDate.toLocaleDateString("en-US", {
                         month: "long",
                         day: "numeric",
