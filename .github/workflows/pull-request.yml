@@ -8,38 +8,45 @@ jobs:
   format:
     name: Format Code
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: npm ci
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
 
-      - name: Run Prettier check
-        run: npx prettier . --check
+      - run: npm config set optional true
+      - run: npm ci
+      - run: npx prettier . --check
 
   lint:
     name: Lint Code
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: npm ci
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
 
-      - name: Run ESLint
-        run: npm run lint
+      - run: npm config set optional true
+      - run: npm ci
+      - run: npm run lint
 
   build:
     name: Build Code
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: npm ci
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
 
-      - name: Run build
-        run: npm run build
+      - run: npm config set optional true
+      - run: npm ci
+
+      - run: npm run build
