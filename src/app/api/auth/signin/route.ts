@@ -1,3 +1,4 @@
+//src/app/api/auth/signin/route.ts
 // API route that verifies email/password, sets an HttpOnly session cookie (JWT), and responds with a redirect.
 
 import { NextResponse } from "next/server";
@@ -6,6 +7,10 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
 import type { ObjectId } from "mongodb";
+
+import { handlers } from "@/auth";
+export const { GET, POST } = handlers;
+
 
 type SigninBody = { email: string; password: string };
 interface UserDoc {

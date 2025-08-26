@@ -1,3 +1,5 @@
+//src/lib/db.ts
+
 // MongoDB connection helper (native driver). Caches the connection in dev and ensures a unique index on users.email.
 
 import { MongoClient, Db } from "mongodb";

@@ -1,3 +1,6 @@
+
+//src/components/forms/signup.tsx
+
 "use client";
 
 //sign up component, which calls fetch("/api/auth/signup") with email and pass.

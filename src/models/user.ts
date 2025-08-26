@@ -1,3 +1,5 @@
+//src/models/users.ts
+
 //A Mongoose schema/model for a User collection.
 //Not needed anymore, since we are using native MongoDB driver approach
 //im scared to delete
