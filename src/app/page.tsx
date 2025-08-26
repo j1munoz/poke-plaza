@@ -1,17 +1,16 @@
 import Image from "next/image";
-
 import AutoplayCarousel from "../components/AutoplayCarousel";
 import FilterMenu from "@/components/FilterDrop";
 import SortMenu from "@/components/SortDrop";
 import "./globals.css";
 import Link from "next/link";
+import SellerCard from "@/components/account/sellercard";
 
 export default function Home() {
   return (
-    
     <div className="font-sans min-h-screen flex flex-col items-center w-full ">
       {/* Carousel */}
-      <div className="text-center bg-[#FFCB05] w-full">
+      <div className="text-center bg-[#FFCB05] w-full text-white">
         <h1 className="text-3xl mt-8 font-bold whitespace-nowrap">
           Buy, Sell and Trade Your Cards!
         </h1>
@@ -24,7 +23,7 @@ export default function Home() {
         <AutoplayCarousel />
       </div>
 
-      <h1 className="text-3xl font-bold whitespace-nowrap m-8">
+      <h1 className="text-3xl font-bold whitespace-nowrap m-8 text-white">
         {" "}
         Welcome to Poke Plaza! Check out today&apos;s featured cards:
       </h1>
@@ -119,8 +118,13 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <SellerCard
+        image="/klefki.jpg"
+        price="99.99"
+        cardName="Klefki"
+        datePosted="January 12, 2025"
+        inStock={true}
+      />
     </div>
-
-    
   );
 }

@@ -1,5 +1,19 @@
-import { TextInput, SubHeading, BaseFields } from "@/types/forms";
+import {
+  TextInput,
+  SubHeading,
+  TextAreaInput,
+  SelectInput,
+  BaseFields,
+} from "@/types/forms";
 import { Dispatch, SetStateAction } from "react";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+} from "@/components/ui/select";
 
 export type FormObject = {
   [key: string]: string | string[] | boolean | undefined;
@@ -28,6 +42,7 @@ const Questions = <T extends FormObject>({
   setLoading,
   setState,
   buttonMessage,
+  loading,
 }: QuestionProps<T>) => {
   return (
     <div className="flex flex-col w-full gap-5 items-center justify-center">
@@ -51,9 +66,6 @@ const Questions = <T extends FormObject>({
                   className="text-2xl text-poke-gray-100"
                 >
                   {(field as TextInput).title}
-                  {(field as TextInput).required && (
-                    <span className="text-red-500"> *</span>
-                  )}
                 </label>
                 <input
                   className="border-1 rounded-md px-2"
@@ -72,6 +84,64 @@ const Questions = <T extends FormObject>({
               </div>
             </div>
           )}
+
+          {field.input === "textarea" && (
+            <div className="flex flex-col p-1 w-[13vw]">
+              <label
+                htmlFor={(field as TextAreaInput).name}
+                className="text-2xl text-poke-gray-100"
+              >
+                {(field as TextAreaInput).title}
+              </label>
+              <textarea
+                className="border-1 rounded-md px-2"
+                maxLength={500}
+                value={object[(field as TextAreaInput).name] as string}
+                onChange={(e) =>
+                  setObject({
+                    ...object,
+                    [(field as TextAreaInput).name]: e.target.value,
+                  } as T)
+                }
+                placeholder={(field as TextAreaInput).placeholder}
+                rows={(field as TextAreaInput).rows}
+                title={(field as TextAreaInput).title}
+              />
+            </div>
+          )}
+
+          {field.input === "select" && (
+            <div className="w-[13vw]">
+              <label
+                htmlFor={(field as SelectInput).name}
+                className="text-2xl text-poke-gray-100"
+              >
+                {(field as SelectInput).title}
+              </label>
+              <Select
+                value={undefined}
+                onValueChange={(value) =>
+                  setObject(
+                    (prev) =>
+                      ({ ...prev, [(field as SelectInput).name]: value }) as T,
+                  )
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select an option" />
+                </SelectTrigger>
+                <SelectContent className="bg-white">
+                  <SelectGroup>
+                    {(field as SelectInput).options.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+          )}
         </div>
       ))}
       <div>
@@ -80,7 +150,7 @@ const Questions = <T extends FormObject>({
           className="bg-poke-blue-200 hover:bg-poke-blue-300 hover:cursor-pointer px-5 py-2 text-white text-xl rounded-lg"
           onClick={() => onSubmit(setLoading, setState)}
         >
-          {buttonMessage}
+          {loading ? "Loading..." : buttonMessage}
         </button>
       </div>
     </div>
