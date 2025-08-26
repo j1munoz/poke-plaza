@@ -1,5 +1,5 @@
 import { UserAccount } from "@/components/account/userinfo";
-import { Review } from "@/components/account/userinfo";
+// import { Review } from "@/components/account/userinfo";
 
 export const mockUser: UserAccount = {
   username: "username.johndoe",

@@ -1,4 +1,4 @@
-import { release } from "os";
+// import { release } from "os";
 
 type CardData = {
   title: string;
