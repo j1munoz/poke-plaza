@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import UserInfo from "@/components/account/userinfo";
-import Image from "next/image";
 import { mockUser } from "../../lib/mockuser";
 import { listingsData } from "../../lib/mocklistings";
+import SellerCard from "@/components/account/sellercard";
 
 export default function AccountPage() {
   const [tab, setTab] = useState<"listings" | "reviews">("listings");
@@ -33,37 +33,33 @@ export default function AccountPage() {
       {/* Tab Content */}
       <div className="mt-6 w-[33vw]">
         {tab === "listings" && (
-          <div>
+          <div className="flex flex-col gap-6"> 
             {mockUser.uploadedListingIds.length > 0 ? (
               mockUser.uploadedListingIds.map((uploadedListing, index) => {
 
-                // Find the card data using the card ID
                 const card = listingsData[uploadedListing.card];
                 if (!card) return null;
 
-                // Find the specific listing using the listing ID
+                
                 const listing = card.listings.find(l => l.id === uploadedListing.listingId);
                 if (!listing) return null;
+                
+                
+                const datePosted = new Date(listing.postDate).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                });
 
                 return (
-                  <div key={index} className="bg-white shadow-md rounded p-4 flex gap-4 items-center mb-4">
-                    <div className="w-1/3">
-                      <Image
-                        src={listing.image}
-                        alt={card.title}
-                        width={200}
-                        height={280}
-                        className="rounded w-full h-auto"
-                      />
-                      <p className="text-2xl font-bold flex justify-center mt-3">${listing.price}</p>
-                    </div>
-                    <div className="flex-1 flex flex-col justify-between h-full">
-                      <div>
-                        <h2 className="text-2xl font-bold">{card.title}</h2>
-                        
-                      </div>
-                    </div>
-                  </div>
+                  <SellerCard
+                    key={index}
+                    image={listing.image}
+                    price={listing.price}
+                    cardName={card.title}
+                    datePosted={datePosted}
+                    inStock={listing.inStock}
+                  />
                 );
               })
             ) : (

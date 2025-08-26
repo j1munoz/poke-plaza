@@ -12,7 +12,8 @@ export const mockUser: UserAccount = {
     reliable: 4,
   },
   uploadedListingIds: [
-    { card: "klefki", listingId: "alice-001" }
+    { card: "klefki", listingId: "alice-001" },
+    { card: "klefki", listingId: "bob-002" }
   ],
   reviews: [
     {
