@@ -15,10 +15,9 @@ type CardData = {
   }[];
 };
 
-
 export const listingsData: Record<string, CardData> = {
   klefki: {
-    title: "Klefki", 
+    title: "Klefki",
     cardnumber: "186",
     releasedate: "November 13, 2020",
     set: "SWSH08 - Fusion Strike",
@@ -28,7 +27,8 @@ export const listingsData: Record<string, CardData> = {
         user: "Alice",
         condition: "Mint",
         price: "99.99",
-        description: "Rare Klefki in mint condition. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        description:
+          "Rare Klefki in mint condition. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         image: "/klefki.jpg",
       },
       {

@@ -1,10 +1,10 @@
 import Image from "next/image";
 
-import AutoplayCarousel from '../components/AutoplayCarousel';
+import AutoplayCarousel from "../components/AutoplayCarousel";
 import FilterMenu from "@/components/FilterDrop";
 import SortMenu from "@/components/SortDrop";
-import './globals.css';
-import Link from 'next/link';
+import "./globals.css";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -67,9 +67,15 @@ export default function Home() {
               className="rounded-t h-auto"
             />
             <h4>Klefki</h4>
-            <p className="text-center"><b>$99.99</b></p>
-            <Link href="/listings/klefki" passHref> {/* Example link to listings page */}
-              <button className="button-5" role="button">View Listings</button>
+            <p className="text-center">
+              <b>$99.99</b>
+            </p>
+            <Link href="/listings/klefki" passHref>
+              {" "}
+              {/* Example link to listings page */}
+              <button className="button-5" role="button">
+                View Listings
+              </button>
             </Link>
           </div>
         </div>
