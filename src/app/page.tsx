@@ -1,26 +1,32 @@
 import Image from "next/image";
+
 import AutoplayCarousel from '../components/AutoplayCarousel';
 import FilterMenu from "@/components/FilterDrop";
 import SortMenu from "@/components/SortDrop";
 import './globals.css';
 import Link from 'next/link';
 
-
 export default function Home() {
   return (
     <div className="font-sans min-h-screen flex flex-col items-center ">
-
       {/* Carousel */}
       <div className="text-center bg-[#FFCB05] w-full">
-        <h1 className="text-3xl mt-8 font-bold whitespace-nowrap">Buy, Sell and Trade Your Cards!</h1>
-        <h2 className="text-xl mt-2 whitespace-nowrap">Explore cards from...</h2>
+        <h1 className="text-3xl mt-8 font-bold whitespace-nowrap">
+          Buy, Sell and Trade Your Cards!
+        </h1>
+        <h2 className="text-xl mt-2 whitespace-nowrap">
+          Explore cards from...
+        </h2>
       </div>
 
       <div className="w-full">
         <AutoplayCarousel />
       </div>
 
-      <h1 className="text-3xl font-bold whitespace-nowrap m-8"> Welcome to Poke Plaza! Check out today's featured cards:</h1>
+      <h1 className="text-3xl font-bold whitespace-nowrap m-8">
+        {" "}
+        Welcome to Poke Plaza! Check out today&apos;s featured cards:
+      </h1>
 
       {/* Search Bar & Filters*/}
       <div className="flex items-center">
@@ -38,9 +44,7 @@ export default function Home() {
         <FilterMenu filterType={"energy"} />
 
         <SortMenu />
-
       </div>
-
 
       {/* Card Section 
       
@@ -49,11 +53,19 @@ export default function Home() {
       
       */}
 
-      <div className="grid gap-6 flex justify-center" style={{ gridTemplateColumns: "repeat(3, 350px)" }}>
-
+      <div
+        className="grid gap-6 justify-center"
+        style={{ gridTemplateColumns: "repeat(3, 350px)" }}
+      >
         <div className="card">
           <div className="card-container">
-            <img src="/klefki.jpg" alt="Card" className="rounded-t h-auto" />
+            <Image
+              src="/klefki.jpg"
+              alt="Card"
+              width={600}
+              height={600}
+              className="rounded-t h-auto"
+            />
             <h4>Klefki</h4>
             <p className="text-center"><b>$99.99</b></p>
             <Link href="/listings/klefki" passHref> {/* Example link to listings page */}
@@ -64,28 +76,42 @@ export default function Home() {
 
         <div className="card">
           <div className="card-container">
-            <img src="/klefki.jpg" alt="Card" className="rounded-t h-auto" />
+            <Image
+              src="/klefki.jpg"
+              alt="Card"
+              width={600}
+              height={600}
+              className="rounded-t h-auto"
+            />
             <h4>Klefki</h4>
-            <p className="text-center"><b>$99.99</b></p>
-            <button className="button-5" role="button">View Listings</button>
+            <p className="text-center">
+              <b>$99.99</b>
+            </p>
+            <button className="button-5" role="button">
+              View Listings
+            </button>
           </div>
         </div>
 
         <div className="card">
           <div className="card-container">
-            <img src="/klefki.jpg" alt="Card" className="rounded-t h-auto" />
+            <Image
+              src="/klefki.jpg"
+              alt="Card"
+              width={600}
+              height={600}
+              className="rounded-t h-auto"
+            />
             <h4>Klefki</h4>
             <p className="text-center">
               <b>$99.99</b>
             </p>
-            <button className="button-5" role="button">View Listings</button>
+            <button className="button-5" role="button">
+              View Listings
+            </button>
           </div>
         </div>
-
       </div>
-
-
-
     </div>
   );
 }
