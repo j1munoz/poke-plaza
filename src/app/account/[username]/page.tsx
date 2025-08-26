@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import UserInfo from "@/components/account/userinfo";
@@ -33,19 +33,20 @@ export default function AccountPage() {
       {/* Tab Content */}
       <div className="mt-6 w-[33vw]">
         {tab === "listings" && (
-          <div className="flex flex-col gap-6"> 
+          <div className="flex flex-col gap-6">
             {mockUser.uploadedListingIds.length > 0 ? (
               mockUser.uploadedListingIds.map((uploadedListing, index) => {
-
                 const card = listingsData[uploadedListing.card];
                 if (!card) return null;
 
-                
-                const listing = card.listings.find(l => l.id === uploadedListing.listingId);
+                const listing = card.listings.find(
+                  (l) => l.id === uploadedListing.listingId,
+                );
                 if (!listing) return null;
-                
-                
-                const datePosted = new Date(listing.postDate).toLocaleDateString("en-US", {
+
+                const datePosted = new Date(
+                  listing.postDate,
+                ).toLocaleDateString("en-US", {
                   month: "long",
                   day: "numeric",
                   year: "numeric",
@@ -63,7 +64,9 @@ export default function AccountPage() {
                 );
               })
             ) : (
-              <p className="text-poke-gray-200 text-center mt-10">No listings yet.</p>
+              <p className="text-poke-gray-200 text-center mt-10">
+                No listings yet.
+              </p>
             )}
           </div>
         )}
@@ -72,19 +75,23 @@ export default function AccountPage() {
           <div>
             {mockUser.reviews.length > 0 ? (
               mockUser.reviews.map((review, index) => (
-                <div key={index} className="bg-white shadow-md rounded p-4 mb-4 flex gap-4">
+                <div
+                  key={index}
+                  className="bg-white shadow-md rounded p-4 mb-4 flex gap-4"
+                >
                   <div className="flex flex-col items-center">
                     <div
-                      className={`w-12 h-12 rounded-full text-white flex items-center justify-center font-bold text-xl ${review.rating === 5
-                          ? 'bg-[#4DFF68]'
+                      className={`w-12 h-12 rounded-full text-white flex items-center justify-center font-bold text-xl ${
+                        review.rating === 5
+                          ? "bg-[#4DFF68]"
                           : review.rating === 4
-                            ? 'bg-[#B2FF66]'
+                            ? "bg-[#B2FF66]"
                             : review.rating === 3
-                              ? 'bg-[#F9FF4D]'
+                              ? "bg-[#F9FF4D]"
                               : review.rating === 2
-                                ? 'bg-[#FFA04D]'
-                                : 'bg-[#FF4D4D]'
-                        }`}
+                                ? "bg-[#FFA04D]"
+                                : "bg-[#FF4D4D]"
+                      }`}
                     >
                       {review.rating}
                     </div>
@@ -145,7 +152,9 @@ export default function AccountPage() {
                 </div>
               ))
             ) : (
-              <p className="text-poke-gray-200 text-center mt-10">No reviews yet.</p>
+              <p className="text-poke-gray-200 text-center mt-10">
+                No reviews yet.
+              </p>
             )}
           </div>
         )}

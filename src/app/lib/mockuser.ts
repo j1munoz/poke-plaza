@@ -13,7 +13,7 @@ export const mockUser: UserAccount = {
   },
   uploadedListingIds: [
     { card: "klefki", listingId: "alice-001" },
-    { card: "klefki", listingId: "bob-002" }
+    { card: "klefki", listingId: "bob-002" },
   ],
   reviews: [
     {

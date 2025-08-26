@@ -6,12 +6,12 @@ export interface Review {
   username: string;
   reviewDate: Date;
   reviewText: string;
-  rating: number,
+  rating: number;
   ratings: {
-    responsive: number,
-    shipping: number,
-    reliable: number,
-  },
+    responsive: number;
+    shipping: number;
+    reliable: number;
+  };
 }
 
 // Update the type for uploaded listings to include the parent card ID
@@ -27,10 +27,10 @@ export interface UserAccount {
   icon: string;
   rating: number;
   ratings: {
-    responsive: number,
-    shipping: number,
-    reliable: number,
-  },
+    responsive: number;
+    shipping: number;
+    reliable: number;
+  };
   uploadedListingIds: UploadedListing[]; // Changed type here
   reviews: Review[];
 }
