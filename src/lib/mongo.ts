@@ -1,33 +1,33 @@
-//src/lib/mongo
-
+// src/lib/mongo.ts
 import { MongoClient, Db } from "mongodb";
 
-const uri = process.env.MONGODB_URI!;
-const dbName = process.env.MONGODB_DB || "pokeplaza";
+let _clientPromise: Promise<MongoClient> | null = null;
+let _db: Db | null = null;
 
-declare global {
-  var _mongoClientPromise: Promise<MongoClient> | undefined;
-  var _mongoDb: Db | undefined;
+function getClient(): Promise<MongoClient> {
+  // read env *inside* the function, not at module top
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    throw new Error("MONGODB_URI is not set");
+  }
+  if (!_clientPromise) {
+    const client = new MongoClient(uri);
+    _clientPromise = client.connect();
+  }
+  return _clientPromise;
 }
-
-if (!global._mongoClientPromise) {
-  const client = new MongoClient(uri);
-  global._mongoClientPromise = client.connect();
-}
-
-const clientPromise = global._mongoClientPromise!;
-
-export default clientPromise;
 
 export async function getDb(): Promise<Db> {
-  if (global._mongoDb) return global._mongoDb;
-  const client = await clientPromise;
+  if (_db) return _db;
+  const dbName = process.env.MONGODB_DB || "pokeplaza";
+  const client = await getClient();
   const db = client.db(dbName);
   await db.collection("users").createIndex({ email: 1 }, { unique: true });
-  global._mongoDb = db;
+  _db = db;
   return db;
 }
 
+export default getClient; // if you still import the client elsewhere
 // import { MongoClient, Db } from "mongodb";
 
 // const uri = process.env.MONGODB_URI!;
