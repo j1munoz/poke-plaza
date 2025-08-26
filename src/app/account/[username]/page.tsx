@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import UserInfo from "@/components/account/userinfo";
@@ -40,10 +40,14 @@ export default function AccountPage() {
                 const card = listingsData[uploadedListing.card];
                 if (!card) return null;
 
-                const listing = card.listings.find(l => l.id === uploadedListing.listingId);
+                const listing = card.listings.find(
+                  (l) => l.id === uploadedListing.listingId,
+                );
                 if (!listing) return null;
 
-                const datePosted = new Date(listing.postDate).toLocaleDateString("en-US", {
+                const datePosted = new Date(
+                  listing.postDate,
+                ).toLocaleDateString("en-US", {
                   month: "long",
                   day: "numeric",
                   year: "numeric",
@@ -61,7 +65,9 @@ export default function AccountPage() {
                 );
               })
             ) : (
-              <p className="text-poke-gray-200 text-center mt-10">No listings yet.</p>
+              <p className="text-poke-gray-200 text-center mt-10">
+                No listings yet.
+              </p>
             )}
           </div>
         )}
@@ -73,7 +79,9 @@ export default function AccountPage() {
                 <ReviewCard key={index} review={review} />
               ))
             ) : (
-              <p className="text-poke-gray-200 text-center mt-10">No reviews yet.</p>
+              <p className="text-poke-gray-200 text-center mt-10">
+                No reviews yet.
+              </p>
             )}
           </div>
         )}

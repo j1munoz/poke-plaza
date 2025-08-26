@@ -36,7 +36,10 @@ const SellerCard = ({
       </div>
       <div className="flex flex-col ml-10 mr-10 items-center justify-center gap-5">
         <p className="text-3xl font-bold">{cardName}</p>
-        <p className="text-xl text-center">Posted on <br/>{datePosted}</p>
+        <p className="text-xl text-center">
+          Posted on <br />
+          {datePosted}
+        </p>
         {inStock ? (
           <p className="bg-poke-green-100 text-poke-green-200 text-xl px-7 py-2 rounded-xl">
             In Stock

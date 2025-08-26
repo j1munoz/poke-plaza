@@ -1,17 +1,16 @@
 // src/components/account/reviewcard.tsx
-import { FaStar } from "react-icons/fa";
-import {Review} from "@/components/account/review"
+import { Review } from "@/components/account/review";
 
 interface ReviewCardProps {
   review: Review;
 }
 
 const getRatingColor = (rating: number) => {
-  if (rating === 5) return 'bg-[#4DFF68]';
-  if (rating === 4) return 'bg-[#B2FF66]';
-  if (rating === 3) return 'bg-[#F9FF4D]';
-  if (rating === 2) return 'bg-[#FFA04D]';
-  return 'bg-[#FF4D4D]';
+  if (rating === 5) return "bg-[#4DFF68]";
+  if (rating === 4) return "bg-[#B2FF66]";
+  if (rating === 3) return "bg-[#F9FF4D]";
+  if (rating === 2) return "bg-[#FFA04D]";
+  return "bg-[#FF4D4D]";
 };
 
 const StarRating = ({ rating }: { rating: number }) => (

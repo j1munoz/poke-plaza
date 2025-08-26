@@ -4,7 +4,6 @@ import FilterMenu from "@/components/FilterDrop";
 import SortMenu from "@/components/SortDrop";
 import "./globals.css";
 import Link from "next/link";
-import SellerCard from "@/components/account/sellercard";
 
 export default function Home() {
   return (

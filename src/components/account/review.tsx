@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { FaStar } from "react-icons/fa";
 import { Review } from "@/lib/mockuser";
@@ -14,18 +14,21 @@ const StarRating = ({ rating }: { rating: number }) => {
       <FaStar
         key={i}
         className={i < rating ? "text-yellow-400" : "text-gray-300"}
-      />
+      />,
     );
   }
   return <div className="flex">{stars}</div>;
 };
 
 export default function ReviewCard({ review }: ReviewCardProps) {
-  const dateFormatted = new Date(review.reviewDate).toLocaleDateString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-  });
+  const dateFormatted = new Date(review.reviewDate).toLocaleDateString(
+    "en-US",
+    {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    },
+  );
 
   return (
     <div className="bg-white rounded-lg shadow-sm p-4 border border-gray-200">

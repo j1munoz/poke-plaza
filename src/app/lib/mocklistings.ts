@@ -1,5 +1,3 @@
-import { release } from "os";
-
 type CardData = {
   title: string;
   cardnumber: string;
@@ -33,7 +31,7 @@ export const listingsData: Record<string, CardData> = {
           "Rare Klefki in mint condition. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         image: "/klefki.jpg",
         postDate: "August 25, 2025",
-        inStock: true
+        inStock: true,
       },
       {
         id: "bob-002",
@@ -43,7 +41,7 @@ export const listingsData: Record<string, CardData> = {
         description: "Played Klefki card, some edge wear.",
         image: "/klefki.jpg",
         postDate: "January 28, 2025",
-        inStock: true
+        inStock: true,
       },
     ],
   },
@@ -62,7 +60,7 @@ export const listingsData: Record<string, CardData> = {
         description: "Rare Pikachu holographic card.",
         image: "/pikachu.jpg",
         postDate: "March 3, 2025",
-        inStock: true
+        inStock: true,
       },
     ],
   },
