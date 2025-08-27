@@ -15,7 +15,7 @@ const getRatingColor = (rating: number) => {
 
 const StarRating = ({ rating }: { rating: number }) => (
   <div className="flex">
-    {[...Array(5)].map((_, i) => (
+    {[...Array(rating)].map((_, i) => (
       <span
         key={i}
         className={`text-yellow-400 ${i < rating ? "star-fill" : "star-empty"}`}

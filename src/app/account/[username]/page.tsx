@@ -19,7 +19,7 @@ export default function AccountPage({ params }: AccountPageProps) {
 
   // this is so bad im so sorry
   // checks if the username in the URL matches the mock user's username
-  const user = mockUsers.find((u) => u.username === username) || null;
+  const user = mockUsers.find((u) => u.username.toLowerCase() === username.toLowerCase()) || null;
 
   if (!user) return <p className="text-center mt-10">User not found</p>;
 
@@ -71,6 +71,7 @@ export default function AccountPage({ params }: AccountPageProps) {
                     cardName={card.title}
                     datePosted={datePosted}
                     inStock={listing.inStock}
+                    id={listing.id}
                   />
                 );
               })

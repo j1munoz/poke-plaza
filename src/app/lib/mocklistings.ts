@@ -46,7 +46,7 @@ export const listingsData: Record<string, CardData> = {
         ],
       },
       {
-        id: "bob-002",
+        id: "alice-002",
         user: "Bob",
         condition: "Used",
         price: "45.00",

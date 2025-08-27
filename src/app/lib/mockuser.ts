@@ -2,7 +2,7 @@ import { UserAccount } from "@/components/account/userinfo";
 
 export const mockUsers: UserAccount[] = [
   {
-    username: "username.johndoe",
+    username: "Alice123",
     joinedOn: "January 16, 2025",
     icon: "/avatar.jpg",
     rating: 5,
@@ -13,18 +13,18 @@ export const mockUsers: UserAccount[] = [
     },
     uploadedListingIds: [
       { card: "klefki", listingId: "alice-001" },
-      { card: "klefki", listingId: "bob-002" },
+      { card: "klefki", listingId: "alice-002" },
     ],
     reviews: [
       {
-        username: "buyer_alpha",
+        username: "coolBuyer99",
         reviewDate: new Date("2024-01-10"),
         reviewText: "Great seller, items exactly as described!",
         rating: 5,
         ratings: { responsive: 5, shipping: 5, reliable: 5 },
       },
       {
-        username: "collector_joe",
+        username: "collectEmAll",
         reviewDate: new Date("2024-03-22"),
         reviewText: "Fast shipping and very responsive. Would buy again.",
         rating: 4,
@@ -40,7 +40,7 @@ export const mockUsers: UserAccount[] = [
     ],
   },
   {
-    username: "username.alice",
+    username: "Bob456",
     joinedOn: "February 20, 2025",
     icon: "/avatar.jpg",
     rating: 4,
