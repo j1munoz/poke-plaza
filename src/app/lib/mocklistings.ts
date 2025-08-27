@@ -1,5 +1,3 @@
-// import { release } from "os";
-
 type CardData = {
   title: string;
   cardnumber: string;

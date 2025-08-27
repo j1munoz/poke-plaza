@@ -18,7 +18,7 @@ const Rating = ({ label, rating, textSize }: RatingProps) => {
 
   return (
     <div className="flex items-center">
-      <p className={textSize ? textSize : "text-xl"}>{label}</p>
+      <p className={textSize ? textSize : "text-l"}>{label}</p>
       <div className="flex">{getStars(rating)}</div>
     </div>
   );

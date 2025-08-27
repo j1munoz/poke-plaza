@@ -29,20 +29,23 @@ const SellerCard = ({
   inStock,
 }: SellerCardProps) => {
   return (
-    <div className="flex justify-between gap-20 bg-white rounded-xl p-5 text-black drop-shadow-2xl">
+    <div className="flex justify-between bg-white rounded-xl p-5 text-black drop-shadow-2xl">
       <div className="flex flex-col items-center gap-4">
         <Image src={image} width={300} height={300} alt={`${cardName} photo`} />
-        <p className="font-bold text-black text-5xl">${price}</p>
+        <p className="font-bold text-black text-3xl">${price}</p>
       </div>
-      <div className="flex flex-col items-center justify-center gap-5">
-        <p className="text-5xl font-bold">{cardName}</p>
-        <p className="text-2xl">Posted on {datePosted}</p>
+      <div className="flex flex-col ml-10 mr-10 items-center justify-center gap-5">
+        <p className="text-3xl font-bold">{cardName}</p>
+        <p className="text-xl text-center">
+          Posted on <br />
+          {datePosted}
+        </p>
         {inStock ? (
-          <p className="bg-poke-green-100 text-poke-green-200 text-2xl px-7 py-2 rounded-xl">
+          <p className="bg-poke-green-100 text-poke-green-200 text-xl px-7 py-2 rounded-xl">
             In Stock
           </p>
         ) : (
-          <p className="bg-poke-red-100 text-poke-red-200 text-2xl px-7 py-2 rounded-xl">
+          <p className="bg-poke-red-100 text-poke-red-200 text-xl px-7 py-2 rounded-xl">
             Sold Out
           </p>
         )}
@@ -51,7 +54,7 @@ const SellerCard = ({
             <Dialog>
               <form>
                 <DialogTrigger asChild>
-                  <div className="flex items-center gap-2 text-poke-gray-100 text-2xl hover:text-poke-blue-100 hover:cursor-pointer">
+                  <div className="flex items-center gap-2 text-poke-gray-100 text-xl hover:text-poke-blue-100 hover:cursor-pointer">
                     <FiEdit />
                     <p>Edit</p>
                   </div>
@@ -71,7 +74,7 @@ const SellerCard = ({
           <Dialog>
             <form>
               <DialogTrigger asChild>
-                <div className="flex items-center gap-2 text-poke-gray-100 text-2xl hover:text-poke-red-100 hover:cursor-pointer">
+                <div className="flex items-center gap-2 text-poke-gray-100 text-xl hover:text-poke-red-100 hover:cursor-pointer">
                   <RiDeleteBin6Line />
                   <p>Delete</p>
                 </div>

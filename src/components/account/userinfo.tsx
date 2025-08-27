@@ -51,7 +51,7 @@ const UserInfo = ({ user }: UserInfoProps) => {
           className="h-[10vh] w-[10vh] object-cover rounded-full"
         />
         <p className="text-3xl">{user.username}</p>
-        <p className="text-xl text-poke-gray-100">Joined on {user.joinedOn}</p>
+        <p className=" text-poke-gray-100">Joined on {user.joinedOn}</p>
       </div>
       <div className="flex flex-col gap-5">
         <Rating label="Rating" rating={user.rating} textSize="text-3xl" />
