@@ -1,3 +1,5 @@
+//src/types/forms.ts
+
 interface InputField {
   width: number;
   required: boolean;
