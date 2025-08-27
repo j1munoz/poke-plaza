@@ -22,7 +22,6 @@ type CardData = {
   set: string;
   listings: Listing[];
 };
-
 export const listingsData: Record<string, CardData> = {
   "sv9-1": {
     title: "Caterpie",
@@ -35,16 +34,16 @@ export const listingsData: Record<string, CardData> = {
         user: "Alice",
         soldby: "Alice123",
         condition: "Mint",
-        price: "99.99",
+        price: "8.99",
         description:
-          "Rare Klefki in mint condition. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        image: "/klefki.jpg",
+          "This Caterpie card is in pristine, mint condition—ideal for collectors seeking a flawless addition to their Pokémon TCG portfolio. The card features sharp corners, a clean surface with no scratches, and vibrant colors that pop under any lighting. Stored in a protective sleeve since opening, it has never been played or handled without gloves. A true gem from the Fusion Strike set, perfect for grading or showcasing.",
+        image: "/caterpie.jpg",
         postDate: "August 25, 2025",
         inStock: true,
         slides: [
-          { src: "/klefki.jpg" },
-          { src: "/klefki.jpg" },
-          { src: "/klefki.jpg" },
+          { src: "/caterpie.jpg" },
+          { src: "/cat1.png" },
+          { src: "/cat2.png" },
         ],
       },
       {
@@ -52,15 +51,14 @@ export const listingsData: Record<string, CardData> = {
         user: "Bob",
         soldby: "Bob456",
         condition: "Used",
-        price: "45.00",
-        description: "Played Klefki card, some edge wear.",
-        image: "/klefki.jpg",
+        price: "3.00",
+        description: "Used Caterpie with slight edge wear.",
+        image: "/caterpie.jpg",
         postDate: "January 28, 2025",
         inStock: true,
         slides: [
-          { src: "/klefki.jpg" },
-          { src: "/klefki.jpg" },
-          { src: "/klefki.jpg" },
+          { src: "/caterpie.jpg" },
+          { src: "/cat3.png" }
         ],
       },
     ],
