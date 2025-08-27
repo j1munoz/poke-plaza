@@ -27,10 +27,7 @@ export default function ImageCarousel({ slides, size }: ImageCarouselProps) {
   };
 
   return (
-    <div
-      className="relative mx-auto"
-      style={{ width: size, height: size }}
-    >
+    <div className="relative mx-auto" style={{ width: size, height: size }}>
       {/* Slides */}
       {slides.map((slide, index) => (
         <div

@@ -36,9 +36,8 @@ export default async function ListingDetailPage({ params }: PageProps) {
       <div className="flex flex-col md:flex-row gap-8 w-full w-screen-xl mx-auto">
         {/* Left: Card Image & Info */}
         <div className="bg-white shadow rounded-lg p-4 w-full md:w-1/3">
-          
-          <ImageCarousel slides={listing.slides} size={390}/>
-          
+          <ImageCarousel slides={listing.slides} size={390} />
+
           <div className="text-center mt-4">
             <p className="text-3xl">${listing.price}</p>
             <p className="text-gray-800 ">#{cardnumber}</p>

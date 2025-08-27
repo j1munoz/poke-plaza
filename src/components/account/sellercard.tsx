@@ -32,14 +32,19 @@ const SellerCard = ({
   id,
 }: SellerCardProps) => {
   // Construct the URL by formatting the cardName
-  const formattedCardName = cardName.toLowerCase().replace(/\s+/g, '-');
+  const formattedCardName = cardName.toLowerCase().replace(/\s+/g, "-");
   const listingUrl = `/listings/${formattedCardName}/${id}`;
 
   return (
     <Link href={listingUrl}>
       <div className="flex justify-between bg-white rounded-xl p-5 text-black drop-shadow-2xl hover:cursor-pointer">
         <div className="flex flex-col items-center gap-4">
-          <Image src={image} width={300} height={300} alt={`${cardName} photo`} />
+          <Image
+            src={image}
+            width={300}
+            height={300}
+            alt={`${cardName} photo`}
+          />
           <p className="font-bold text-black text-3xl">${price}</p>
         </div>
         <div className="flex flex-col ml-10 mr-10 items-center justify-center gap-5">

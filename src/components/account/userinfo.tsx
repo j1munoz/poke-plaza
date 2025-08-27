@@ -112,7 +112,9 @@ const UserInfo = ({ user }: UserInfoProps) => {
                   </div>
                   <DialogFooter className="mt-4">
                     <DialogClose asChild>
-                      <button className="hover:text-poke-gray-100">Cancel</button>
+                      <button className="hover:text-poke-gray-100">
+                        Cancel
+                      </button>
                     </DialogClose>
                     <button className="bg-poke-blue-100 text-white px-4 py-2 rounded">
                       Confirm
@@ -132,12 +134,15 @@ const UserInfo = ({ user }: UserInfoProps) => {
                   <DialogHeader>
                     <DialogTitle>Delete Account</DialogTitle>
                     <DialogDescription>
-                      Are you sure you want to delete your account? This action cannot be undone.
+                      Are you sure you want to delete your account? This action
+                      cannot be undone.
                     </DialogDescription>
                   </DialogHeader>
                   <DialogFooter>
                     <DialogClose asChild>
-                      <button className="hover:text-poke-gray-100">Cancel</button>
+                      <button className="hover:text-poke-gray-100">
+                        Cancel
+                      </button>
                     </DialogClose>
                     <button className="bg-red-500 text-white px-4 py-2 rounded">
                       Confirm
