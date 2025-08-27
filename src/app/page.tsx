@@ -1,11 +1,41 @@
+"use client";
+
 import Image from "next/image";
 import AutoplayCarousel from "../components/AutoplayCarousel";
 import FilterMenu from "@/components/FilterDrop";
 import SortMenu from "@/components/SortDrop";
 import "./globals.css";
-import Link from "next/link";
+import Card from "@/components/home/card";
+import { useState, useEffect } from "react";
+
+export type CardSummary = {
+  _id: string;
+  cardId: string;
+  name: string;
+  setName: string;
+  setSeries: string;
+  image: string;
+  releaseDate: string;
+  number: string;
+  averageSellPrice: number | null;
+};
 
 export default function Home() {
+  const [cards, setCards] = useState<CardSummary[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCards = async () => {
+      setLoading(true);
+      const res = await fetch("/api/cards");
+      const data = await res.json();
+      setCards(data);
+      setLoading(false);
+    };
+
+    fetchCards();
+  }, []);
+
   return (
     <div className="font-sans min-h-screen flex flex-col items-center w-full ">
       {/* Carousel */}
@@ -56,66 +86,17 @@ export default function Home() {
         className="grid gap-6 justify-center"
         style={{ gridTemplateColumns: "repeat(3, 350px)" }}
       >
-        <div className="card">
-          <div className="card-container">
-            <Image
-              src="/klefki.jpg"
-              alt="Card"
-              width={600}
-              height={600}
-              className="rounded-t h-auto"
+        {loading && <p>Loading cards...</p>}
+        {cards &&
+          cards.map((card, index) => (
+            <Card
+              key={index}
+              image={card.image}
+              name={card.name}
+              price={card.averageSellPrice}
+              cardId={card.cardId}
             />
-            <h4>Klefki</h4>
-            <p className="text-center">
-              <b>$99.99</b>
-            </p>
-            <Link href="/listings/klefki" passHref>
-              {" "}
-              {/* Example link to listings page */}
-              <button className="button-5" role="button">
-                View Listings
-              </button>
-            </Link>
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="card-container">
-            <Image
-              src="/klefki.jpg"
-              alt="Card"
-              width={600}
-              height={600}
-              className="rounded-t h-auto"
-            />
-            <h4>Klefki</h4>
-            <p className="text-center">
-              <b>$99.99</b>
-            </p>
-            <button className="button-5" role="button">
-              View Listings
-            </button>
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="card-container">
-            <Image
-              src="/klefki.jpg"
-              alt="Card"
-              width={600}
-              height={600}
-              className="rounded-t h-auto"
-            />
-            <h4>Klefki</h4>
-            <p className="text-center">
-              <b>$99.99</b>
-            </p>
-            <button className="button-5" role="button">
-              View Listings
-            </button>
-          </div>
-        </div>
+          ))}
       </div>
     </div>
   );
