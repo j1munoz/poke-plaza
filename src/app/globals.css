@@ -36,13 +36,6 @@
   --color-poke-red-200: #5c0000;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #f3f6fb;
-  }
-}
-
 body {
   background: var(--background);
   /* color: var(--foreground); */

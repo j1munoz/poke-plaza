@@ -1,18 +1,25 @@
+type Slide = {
+  src: string;
+};
+
+type Listing = {
+  id: string;
+  user: string;
+  condition: string;
+  price: string;
+  description: string;
+  image: string;
+  postDate: string;
+  inStock: boolean;
+  slides: Slide[];
+};
+
 type CardData = {
   title: string;
   cardnumber: string;
   releasedate: string;
   set: string;
-  listings: {
-    id: string;
-    user: string;
-    condition: string;
-    price: string;
-    description: string;
-    image: string;
-    postDate: string;
-    inStock: boolean;
-  }[];
+  listings: Listing[];
 };
 
 export const listingsData: Record<string, CardData> = {
@@ -32,6 +39,11 @@ export const listingsData: Record<string, CardData> = {
         image: "/klefki.jpg",
         postDate: "August 25, 2025",
         inStock: true,
+        slides: [
+          { src: "/avatar.jpg" },
+          { src: "/klefki.jpg" },
+          { src: "/klefki.jpg" },
+        ],
       },
       {
         id: "bob-002",
@@ -42,6 +54,7 @@ export const listingsData: Record<string, CardData> = {
         image: "/klefki.jpg",
         postDate: "January 28, 2025",
         inStock: true,
+        slides: [{ src: "/klefki.jpg" }]
       },
     ],
   },
@@ -61,6 +74,7 @@ export const listingsData: Record<string, CardData> = {
         image: "/pikachu.jpg",
         postDate: "March 3, 2025",
         inStock: true,
+        slides: [{ src: "/pikachu.jpg" }],
       },
     ],
   },
