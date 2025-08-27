@@ -2,41 +2,50 @@
 
 import { useState } from "react";
 import UserInfo from "@/components/account/userinfo";
-import { mockUser } from "../../lib/mockuser";
+import { mockUsers } from "../../lib/mockuser";
 import { listingsData } from "../../lib/mocklistings";
 import SellerCard from "@/components/account/sellercard";
 import ReviewCard from "@/components/account/reviewcard";
 
-export default function AccountPage() {
+interface AccountPageProps {
+  params: { username: string };
+}
+
+export default function AccountPage({ params }: AccountPageProps) {
+  const { username } = params;
+
   const [tab, setTab] = useState<"listings" | "reviews">("listings");
+
+  // this is so bad im so sorry
+  // checks if the username in the URL matches the mock user's username
+  const user = mockUsers.find((u) => u.username === username) || null;
+
+  if (!user) return <p className="text-center mt-10">User not found</p>;
 
   return (
     <div className="flex flex-col items-center bg-poke-gray-50 min-h-screen pt-10 text-poke-dark">
-      {/* User Info */}
-      <UserInfo user={mockUser} />
+      <UserInfo user={user} />
 
-      {/* Tabs */}
       <div className="flex mt-10 w-[33vw] justify-center gap-10">
         <button
           onClick={() => setTab("listings")}
           className={`pb-2 ${tab === "listings" ? "border-b-4 border-yellow-400 text-yellow-600 font-semibold" : "text-poke-gray-200"}`}
         >
-          Listings ({mockUser.uploadedListingIds.length})
+          Listings ({user.uploadedListingIds.length})
         </button>
         <button
           onClick={() => setTab("reviews")}
           className={`pb-2 ${tab === "reviews" ? "border-b-4 border-yellow-400 text-yellow-600 font-semibold" : "text-poke-gray-200"}`}
         >
-          Reviews ({mockUser.reviews.length})
+          Reviews ({user.reviews.length})
         </button>
       </div>
 
-      {/* Tab Content */}
       <div className="mt-6 w-[33vw]">
         {tab === "listings" && (
           <div className="flex flex-col gap-6 ml-20 mr-20">
-            {mockUser.uploadedListingIds.length > 0 ? (
-              mockUser.uploadedListingIds.map((uploadedListing, index) => {
+            {user.uploadedListingIds.length > 0 ? (
+              user.uploadedListingIds.map((uploadedListing, index) => {
                 const card = listingsData[uploadedListing.card];
                 if (!card) return null;
 
@@ -74,8 +83,8 @@ export default function AccountPage() {
 
         {tab === "reviews" && (
           <div>
-            {mockUser.reviews.length > 0 ? (
-              mockUser.reviews.map((review, index) => (
+            {user.reviews.length > 0 ? (
+              user.reviews.map((review, index) => (
                 <ReviewCard key={index} review={review} />
               ))
             ) : (

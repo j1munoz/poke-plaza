@@ -9,4 +9,3 @@ export interface Review {
     reliable: number;
   };
 }
-
