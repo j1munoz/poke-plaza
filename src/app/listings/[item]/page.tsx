@@ -1,9 +1,8 @@
 // app/listings/[item]/page.tsx
+import { listingsData } from "../../lib/mocklistings";
 import SortMenu from "@/components/SortDrop";
 import FilterMenu from "@/components/FilterDrop";
-import { getDb } from "@/lib/mongo";
-import Image from "next/image";
-// import listings
+import Link from "next/link";
 
 export default async function ItemListingsPage({
   params,
@@ -13,17 +12,18 @@ export default async function ItemListingsPage({
   const { item } = await params;
   const itemKey = item.toLocaleLowerCase();
 
-  const db = await getDb();
-  const card = await db.collection("cards").findOne({ cardId: itemKey });
+  const itemData = listingsData[itemKey as keyof typeof listingsData];
 
-  if (!card) {
-    return <p>No listings found for {decodeURIComponent(itemKey)}</p>;
+  if (!itemData) {
+    return <p>No listings found for {itemKey}</p>;
   }
+
+  const { title, listings, cardnumber, releasedate, set } = itemData;
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center p-6 ml-40 mr-40">
       {/* Title */}
-      <h1 className="text-4xl font-bold mb-8">{card.name}</h1>
+      <h1 className="text-4xl font-bold mb-8">{title}</h1>
 
       {/* Filters */}
       <div className="flex items-center gap-4 mb-6">
@@ -34,24 +34,18 @@ export default async function ItemListingsPage({
       {/* Content */}
       <div className="flex flex-col md:flex-row gap-8">
         {/* Left: Card Image & Info */}
-        <div className="bg-white shadow rounded-lg p-4 w-100 flex flex-col items-center">
-          <Image
-            src={card.image}
-            alt={card.name}
-            height={300}
-            width={300}
-            className="mb-2 rounded"
-          />
+        <div className="bg-white shadow rounded-lg p-4 w-100">
+          <img src={listings[0].image} alt={title} className="mb-2 rounded" />
           <div className="text-center mt-4">
-            <p className="text-gray-800 font-semibold">#{card.number}</p>
-            <p className="text-gray-600">{card.setName}</p>
-            <p className="text-gray-500">Released on {card.releaseDate}</p>
+            <p className="text-gray-800 font-semibold">#{cardnumber}</p>
+            <p className="text-gray-600">{set}</p>
+            <p className="text-gray-500">Released on {releasedate}</p>
           </div>
         </div>
 
         {/* Right: Listings */}
         <div className="flex flex-col gap-4">
-          {/* {listings.map((listing) => (
+          {listings.map((listing) => (
             <div
               key={listing.id}
               className="bg-white shadow rounded-lg flex justify-between items-center p-4 w-150"
@@ -68,7 +62,7 @@ export default async function ItemListingsPage({
                 </button>
               </Link>
             </div>
-          ))} */}
+          ))}
         </div>
       </div>
     </div>
