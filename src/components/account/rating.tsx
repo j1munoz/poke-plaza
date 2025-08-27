@@ -22,6 +22,6 @@ const Rating = ({ label, rating, textSize }: RatingProps) => {
       <div className="flex">{getStars(rating)}</div>
     </div>
   );
-}; 
+};
 
 export default Rating;

@@ -5,6 +5,7 @@ type Slide = {
 type Listing = {
   id: string;
   user: string;
+  soldby: string;
   condition: string;
   price: string;
   description: string;
@@ -32,6 +33,7 @@ export const listingsData: Record<string, CardData> = {
       {
         id: "alice-001",
         user: "Alice",
+        soldby: "Alice123",
         condition: "Mint",
         price: "99.99",
         description:
@@ -48,6 +50,7 @@ export const listingsData: Record<string, CardData> = {
       {
         id: "alice-002",
         user: "Bob",
+        soldby: "Bob456",
         condition: "Used",
         price: "45.00",
         description: "Played Klefki card, some edge wear.",
@@ -72,6 +75,7 @@ export const listingsData: Record<string, CardData> = {
       {
         id: "charlie-001",
         user: "Charlie",
+        soldby: "Charlie789",
         condition: "Mint",
         price: "120.00",
         description: "Rare Pikachu holographic card.",

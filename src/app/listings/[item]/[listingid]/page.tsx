@@ -1,5 +1,15 @@
 import { listingsData } from "../../../lib/mocklistings";
 import ImageCarousel from "@/components/Carousel";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import AddReviewForm from "@/components/forms/review";
+import Link from "next/link";
 
 type PageProps = {
   params: Promise<{
@@ -49,7 +59,14 @@ export default async function ListingDetailPage({ params }: PageProps) {
         {/* Right: Listing Description */}
         <div className="flex flex-col gap-4 w-full md:w-2/3">
           <p className="mt-4">
-            Sold by {listing.user} <br />
+            Sold by{" "}
+            <Link
+              href={`/account/${listing.soldby}`}
+              className="hover:cursor-pointer underline hover:text-poke-yellow-100"
+            >
+              {listing.user}
+            </Link>{" "}
+            <br />
             <br />
             Card Condition: {listing.condition} <br />
             <br />
@@ -57,10 +74,24 @@ export default async function ListingDetailPage({ params }: PageProps) {
           </p>
 
           <blockquote className="ml-5 mr-5"> {listing.description} </blockquote>
-
-          <button className="mt-6 bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded w-full">
-            Buy Now
-          </button>
+          <Dialog>
+            <form>
+              <DialogTrigger asChild>
+                <button className="mt-6 bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded w-1/4">
+                  Buy Now
+                </button>
+              </DialogTrigger>
+              <DialogContent className="bg-white">
+                <DialogHeader>
+                  <DialogTitle>Card Purchased</DialogTitle>
+                  <DialogDescription>
+                    Leave a review to {listing.user}
+                  </DialogDescription>
+                </DialogHeader>
+                <AddReviewForm />
+              </DialogContent>
+            </form>
+          </Dialog>
         </div>
       </div>
     </div>
