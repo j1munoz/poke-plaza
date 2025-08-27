@@ -56,10 +56,7 @@ export const listingsData: Record<string, CardData> = {
         image: "/caterpie.jpg",
         postDate: "January 28, 2025",
         inStock: true,
-        slides: [
-          { src: "/caterpie.jpg" },
-          { src: "/cat3.png" }
-        ],
+        slides: [{ src: "/caterpie.jpg" }, { src: "/cat3.png" }],
       },
     ],
   },

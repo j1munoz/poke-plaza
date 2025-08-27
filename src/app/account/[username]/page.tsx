@@ -85,7 +85,6 @@ export default function AccountPage({ params }: AccountPageProps) {
             )}
 
             <AddCard />
-
           </div>
         )}
 
