@@ -24,8 +24,8 @@ type CardData = {
 };
 
 export const listingsData: Record<string, CardData> = {
-  klefki: {
-    title: "Klefki",
+  "sv9-1": {
+    title: "Caterpie",
     cardnumber: "186",
     releasedate: "November 13, 2020",
     set: "SWSH08 - Fusion Strike",

@@ -6,6 +6,7 @@ import { mockUsers } from "../../lib/mockuser";
 import { listingsData } from "../../lib/mocklistings";
 import SellerCard from "@/components/account/sellercard";
 import ReviewCard from "@/components/account/reviewcard";
+import AddCard from "@/components/account/addlisting";
 
 interface AccountPageProps {
   params: { username: string };
@@ -82,6 +83,9 @@ export default function AccountPage({ params }: AccountPageProps) {
                 No listings yet.
               </p>
             )}
+
+            <AddCard />
+
           </div>
         )}
 
