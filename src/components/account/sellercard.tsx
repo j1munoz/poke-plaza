@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link"; // Import the Link component
+import Link from "next/link";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import {

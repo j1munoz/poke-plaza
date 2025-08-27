@@ -28,6 +28,7 @@ export interface Review {
 export interface UploadedListing {
   card: string;
   listingId: string;
+  soldby: string;
 }
 
 // Define the structure of a user account, matching mockuser.tsx
