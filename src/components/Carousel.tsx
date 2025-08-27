@@ -11,7 +11,7 @@ interface ImageCarouselProps {
   size?: number;
 }
 
-export default function ImageCarousel({ slides, size = 500 }: ImageCarouselProps) {
+export default function ImageCarousel({ slides, size }: ImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const prevSlide = () => {

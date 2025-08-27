@@ -40,7 +40,7 @@ export const listingsData: Record<string, CardData> = {
         postDate: "August 25, 2025",
         inStock: true,
         slides: [
-          { src: "/avatar.jpg" },
+          { src: "/klefki.jpg" },
           { src: "/klefki.jpg" },
           { src: "/klefki.jpg" },
         ],
@@ -54,7 +54,7 @@ export const listingsData: Record<string, CardData> = {
         image: "/klefki.jpg",
         postDate: "January 28, 2025",
         inStock: true,
-        slides: [{ src: "/klefki.jpg" }]
+        slides: [{ src: "/klefki.jpg" }, { src: "/klefki.jpg" }, { src: "/klefki.jpg" }]
       },
     ],
   },

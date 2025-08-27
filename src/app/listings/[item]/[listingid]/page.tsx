@@ -28,12 +28,12 @@ export default async function ListingDetailPage({ params }: PageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col p-6">
+    <div className="flex flex-col p-6 w-full">
       {/* Title */}
       <h1 className="text-4xl font-bold mb-8 text-center">{title}</h1>
 
       {/* Content */}
-      <div className="flex flex-col md:flex-row gap-8 w-full max-w-screen-xl mx-auto">
+      <div className="flex flex-col md:flex-row gap-8 w-full w-screen-xl mx-auto">
         {/* Left: Card Image & Info */}
         <div className="bg-white shadow rounded-lg p-4 w-full md:w-1/3">
           
