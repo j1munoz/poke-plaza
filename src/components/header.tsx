@@ -10,7 +10,7 @@ const Header: React.FC = () => {
           Home
         </Link>
         <Link href="#about" className="hover:underline">
-          Account Settings
+          My Account
         </Link>
         <Link href="/signin" className="hover:underline">
           Sign In

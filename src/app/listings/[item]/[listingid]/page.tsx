@@ -1,4 +1,5 @@
 import { listingsData } from "../../../lib/mocklistings";
+import ImageCarousel from "@/components/Carousel";
 
 type PageProps = {
   params: Promise<{
@@ -27,19 +28,16 @@ export default async function ListingDetailPage({ params }: PageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col p-6">
+    <div className="flex flex-col p-6 w-full">
       {/* Title */}
       <h1 className="text-4xl font-bold mb-8 text-center">{title}</h1>
 
       {/* Content */}
-      <div className="flex flex-col md:flex-row gap-8 w-full max-w-screen-xl mx-auto">
+      <div className="flex flex-col md:flex-row gap-8 w-full w-screen-xl mx-auto">
         {/* Left: Card Image & Info */}
         <div className="bg-white shadow rounded-lg p-4 w-full md:w-1/3">
-          <img
-            src={listing.image}
-            alt={title}
-            className="mb-4 rounded w-full"
-          />
+          <ImageCarousel slides={listing.slides} size={390} />
+
           <div className="text-center mt-4">
             <p className="text-3xl">${listing.price}</p>
             <p className="text-gray-800 ">#{cardnumber}</p>
