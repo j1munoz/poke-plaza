@@ -32,7 +32,7 @@ const SellerCard = ({
   id,
 }: SellerCardProps) => {
   // Construct the URL by formatting the cardName
-  const formattedCardName = cardName.toLowerCase().replace(/\s+/g, "-");
+  // const formattedCardName = cardName.toLowerCase().replace(/\s+/g, "-");
   const listingUrl = `/listings/sv9-1/${id}`;
 
   return (

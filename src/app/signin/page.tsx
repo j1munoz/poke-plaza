@@ -1,140 +1,154 @@
-//src/app/signin/page.tsx
-
+// src/app/signin/page.tsx
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
-import Link from "next/link";
+import { useEffect, useMemo } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
 
 export default function SignInPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const { status } = useSession();
+
+  const callbackUrl = useMemo(
+    () => searchParams.get("callbackUrl") || "/",
+    [searchParams],
+  );
+
+  useEffect(() => {
+    if (status === "authenticated") router.replace(callbackUrl);
+  }, [status, router, callbackUrl]);
 
   return (
     <main className="mx-auto max-w-sm p-6 space-y-6">
       <h1 className="text-2xl font-semibold">Sign in</h1>
 
       <button
-        onClick={() => signIn("google", { callbackUrl: "/" })}
+        onClick={() => signIn("google", { callbackUrl })}
         className="w-full rounded-lg border px-4 py-2"
       >
         Continue with Google
       </button>
-
-      <div className="text-center text-sm text-gray-500">or</div>
-
-      <form
-        onSubmit={async (e) => {
-          e.preventDefault();
-          setLoading(true);
-          setError(null);
-          const res = await signIn("credentials", {
-            email,
-            password,
-            redirect: false,
-          });
-          setLoading(false);
-          if (res?.ok) {
-            router.push("/");
-          } else {
-            setError(res?.error || "Invalid credentials");
-          }
-        }}
-        className="space-y-3"
-      >
-        <input
-          name="email"
-          type="email"
-          placeholder="you@example.com"
-          className="w-full rounded-lg border px-3 py-2"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="••••••••"
-          className="w-full rounded-lg border px-3 py-2"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        {error && <p className="text-sm text-red-600">{error}</p>}
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full rounded-lg bg-black px-4 py-2 text-white"
-        >
-          {loading ? "Signing in..." : "Sign in"}
-        </button>
-      </form>
-      <p className="text-lg">
-        Don&apos;t have an account?{" "}
-        <Link
-          href="/signup"
-          className="text-poke-blue-200 underline hover:text-poke-yellow-100"
-        >
-          Create one here!
-        </Link>
-      </p>
     </main>
   );
 }
 
+// // src/app/signin/page.tsx
 // "use client";
 
-// import { useState } from "react";
-// import Form from "@/components/forms/form/form";
-// import { ATTRIBUTES, FIELDS, buttonMessage } from "@/data/form/signin";
+// import { useEffect, useMemo, useState } from "react";
+// import { useRouter, useSearchParams } from "next/navigation";
+// import { signIn, useSession } from "next-auth/react";
 // import Link from "next/link";
 
-// export default function SignIn() {
-//   const [info, setInfo] = useState({ ...ATTRIBUTES });
-//   const [loading, setLoading] = useState(false);
-//   const [state, setState] = useState(0);
+// export default function SignInPage() {
+//   const router = useRouter();
+//   const searchParams = useSearchParams();
+//   const { status } = useSession(); // 'loading' | 'authenticated' | 'unauthenticated'
 
-//   const onSubmit = async () => {
-//     console.log("Form submitted:", info, state);
-//   };
+//   const callbackUrl = useMemo(
+//     () => searchParams.get("callbackUrl") || "/",
+//     [searchParams]
+//   );
+
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   const [loadingCreds, setLoadingCreds] = useState(false);
+//   const [error, setError] = useState<string | null>(null);
+
+//   // If already signed in, bounce to callbackUrl
+//   useEffect(() => {
+//     if (status === "authenticated") router.replace(callbackUrl);
+//   }, [status, router, callbackUrl]);
 
 //   return (
-//     <div className="flex flex-col items-center justify-center gap-5">
-//       <Form
-//         fields={FIELDS}
-//         object={info}
-//         setObject={setInfo}
-//         onSubmit={onSubmit}
-//         loading={loading}
-//         setLoading={setLoading}
-//         setState={setState}
-//         buttonMessage={buttonMessage}
-//       />
+//     <main className="mx-auto max-w-sm p-6 space-y-6">
+//       <h1 className="text-2xl font-semibold">Sign in</h1>
+
+//       <button
+//         onClick={() => signIn("google", { callbackUrl })}
+//         className="w-full rounded-lg border px-4 py-2"
+//       >
+//         Continue with Google
+//       </button>
+
+//       <div className="text-center text-sm text-gray-500">or</div>
+
+//       <form
+//         onSubmit={async (e) => {
+//           e.preventDefault();
+//           setError(null);
+//           setLoadingCreds(true);
+
+//           const res = await signIn("credentials", {
+//             email,
+//             password,
+//             redirect: false,
+//             callbackUrl,
+//           });
+
+//           setLoadingCreds(false);
+
+//           // next-auth returns { ok, error, status, url } when redirect:false
+//           if (res?.error) {
+//             // Map common errors to friendly text
+//             setError(
+//               res.error === "CredentialsSignin"
+//                 ? "Invalid email or password."
+//                 : res.error
+//             );
+//             return;
+//           }
+
+//           if (res?.url) {
+//             router.push(res.url);
+//           } else {
+//             router.push(callbackUrl);
+//           }
+//         }}
+//         className="space-y-3"
+//       >
+//         <input
+//           name="email"
+//           type="email"
+//           placeholder="you@example.com"
+//           className="w-full rounded-lg border px-3 py-2"
+//           value={email}
+//           onChange={(e) => setEmail(e.target.value)}
+//           required
+//           autoComplete="email"
+//         />
+//         <input
+//           name="password"
+//           type="password"
+//           placeholder="••••••••"
+//           className="w-full rounded-lg border px-3 py-2"
+//           value={password}
+//           onChange={(e) => setPassword(e.target.value)}
+//           required
+//           autoComplete="current-password"
+//         />
+
+//         {error && <p className="text-sm text-red-600">{error}</p>}
+
+//         <button
+//           type="submit"
+//           disabled={loadingCreds}
+//           className="w-full rounded-lg bg-black px-4 py-2 text-white disabled:opacity-60"
+//         >
+//           {loadingCreds ? "Signing in..." : "Sign in"}
+//         </button>
+//       </form>
+
 //       <p className="text-lg">
 //         Don&apos;t have an account?{" "}
 //         <Link
-//           href="/signup"
+//           href={`/signup?callbackUrl=${encodeURIComponent(callbackUrl)}`}
 //           className="text-poke-blue-200 underline hover:text-poke-yellow-100"
 //         >
 //           Create one here!
 //         </Link>
 //       </p>
-//     </div>
+//     </main>
 //   );
 // }
-
-// import SignIn from "@/components/forms/signin";
-
-// const SignInPage = () => {
-//   return (
-//     <div className="w-1/2 rounded-2xl bg-poke-white-200 drop-shadow-2xl py-5 mt-5">
-//       <SignIn />
-//     </div>
-//   );
-// };
-
-// export default SignInPage;
