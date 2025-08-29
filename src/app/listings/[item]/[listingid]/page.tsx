@@ -103,7 +103,7 @@ export default async function ListingDetailPage({ params }: PageProps) {
                       Leave a review to {listing.user}
                     </DialogDescription>
                   </DialogHeader>
-                  <AddReviewForm />
+                  <AddReviewForm soldBy={listing.soldBy} />
                 </DialogContent>
               </form>
             </Dialog>

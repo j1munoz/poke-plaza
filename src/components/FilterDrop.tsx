@@ -1,65 +1,32 @@
+"use client";
+
 interface FilterMenuProps {
-  filterType: "energy" | "condition" | "foil"; // Define the accepted filter types
+  filterType: "energy" | "condition" | "foil";
+  onChange: (value: string) => void;
 }
 
-export default function FilterMenu({ filterType }: FilterMenuProps) {
+export default function FilterMenu({ filterType, onChange }: FilterMenuProps) {
   return (
     <div className="dropdown flex ml-4 mb-8">
       <button className="dropbtn whitespace-nowrap">Filter By ▼</button>
       <div className="dropdown-content text-white">
         <p className="bg-[#21386E]">
-          {" "}
           <b>
             {filterType === "energy"
               ? "Energy Type"
               : filterType === "condition"
                 ? "Condition"
-                : "Foil Type"}{" "}
+                : "Foil Type"}
           </b>
         </p>
 
-        {filterType === "energy" ? (
-          <EnergyTypeRadios />
-        ) : filterType === "condition" ? (
-          <ConditionRadios />
-        ) : (
-          "Foil Type"
-        )}
+        <EnergyTypeRadios onChange={onChange} />
       </div>
     </div>
   );
 }
 
-function ConditionRadios() {
-  const conditions = [
-    "Mint",
-    "Lightly Played",
-    "Moderately Played",
-    "Heavily Played",
-    "Damaged",
-  ];
-
-  return (
-    <div>
-      {conditions.map((condition) => (
-        <label
-          key={condition}
-          className="flex items-center space-x-2 bg-[#1D2C5E]"
-        >
-          <input
-            type="radio"
-            name="conditionFilter"
-            value={condition.toLowerCase().replace(" ", "-")}
-            className="form-radio text-blue-600"
-          />
-          <span className="text-white">{condition}</span>
-        </label>
-      ))}
-    </div>
-  );
-}
-
-function EnergyTypeRadios() {
+function EnergyTypeRadios({ onChange }: { onChange: (val: string) => void }) {
   const energyTypes = [
     "Grass",
     "Fire",
@@ -82,6 +49,7 @@ function EnergyTypeRadios() {
             type="radio"
             name="typeFilter"
             value={type.toLowerCase()}
+            onChange={(e) => onChange(e.target.value)}
             className="form-radio text-blue-600"
           />
           <span className="text-white">{type}</span>
