@@ -1,14 +1,25 @@
-// app/listings/[item]/page.tsx
 import { listingsData } from "../../lib/mocklistings";
-import SortMenu from "@/components/SortDrop";
-import FilterMenu from "@/components/FilterDrop";
 import Link from "next/link";
+
+export type CardSummary = {
+  _id: string;
+  cardId: string;
+  name: string;
+  setName: string;
+  setSeries: string;
+  image: string;
+  releaseDate: string;
+  number: string;
+  averageSellPrice: number | null;
+  types?: string[];
+};
 
 export default async function ItemListingsPage({
   params,
 }: {
   params: Promise<{ item: string }>;
 }) {
+
   const { item } = await params;
   const itemKey = item.toLocaleLowerCase();
 
@@ -24,12 +35,6 @@ export default async function ItemListingsPage({
     <div className="min-h-screen bg-gray-100 flex flex-col items-center p-6 ml-40 mr-40">
       {/* Title */}
       <h1 className="text-4xl font-bold mb-8">{title}</h1>
-
-      {/* Filters */}
-      <div className="flex items-center gap-4 mb-6">
-        <FilterMenu filterType={"condition"} />
-        <SortMenu />
-      </div>
 
       {/* Content */}
       <div className="flex flex-col md:flex-row gap-8">
