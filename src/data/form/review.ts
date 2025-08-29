@@ -1,10 +1,13 @@
 import { TextAreaInput, SelectInput, BaseFields } from "@/types/forms";
 
 interface Attributes {
+  rating: string;
   responsive: string;
   shipping: string;
   reliable: string;
   description: string;
+  soldBy: string;
+  reviewBy: string;
 }
 
 interface Fields extends BaseFields {
@@ -15,10 +18,13 @@ interface Fields extends BaseFields {
 }
 
 export const ATTRIBUTES: Attributes = {
+  rating: "",
   responsive: "",
   shipping: "",
   reliable: "",
   description: "",
+  soldBy: "",
+  reviewBy: "",
 };
 
 export const FIELDS: Fields = {

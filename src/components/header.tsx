@@ -9,7 +9,7 @@ const Header: React.FC = () => {
         <Link href="/" className="hover:underline">
           Home
         </Link>
-        <Link href="/account/alice123" className="hover:underline">
+        <Link href="/account/Alice123" className="hover:underline">
           My Account
         </Link>
         <Link href="/signin" className="hover:underline">
