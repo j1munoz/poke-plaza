@@ -52,28 +52,15 @@ export default function Home() {
     : cards;
 
   const sortedCards = [...filteredCards].sort((a, b) => {
-    if (priceFilter != "none") {
-      if (priceFilter === "high-to-low") {
-        if ((b.averageSellPrice ?? 0) !== (a.averageSellPrice ?? 0)) {
-          return (b.averageSellPrice ?? 0) - (a.averageSellPrice ?? 0);
-        }
-      }
-      if (priceFilter === "low-to-high") {
-        if ((a.averageSellPrice ?? 0) !== (b.averageSellPrice ?? 0)) {
-          return (a.averageSellPrice ?? 0) - (b.averageSellPrice ?? 0);
-        }
-      }
-    }
+  if (priceFilter === "high-to-low") return (b.averageSellPrice ?? 0) - (a.averageSellPrice ?? 0);
+  if (priceFilter === "low-to-high") return (a.averageSellPrice ?? 0) - (b.averageSellPrice ?? 0);
 
-    if (dateFilter != "none") {
-      const dateA = new Date(a.releaseDate).getTime();
-      const dateB = new Date(b.releaseDate).getTime();
-      if (dateFilter === "newest") return dateB - dateA;
-      if (dateFilter === "oldest") return dateA - dateB;
-    }
+  if (dateFilter === "newest") return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
+  if (dateFilter === "oldest") return new Date(a.releaseDate).getTime() - new Date(b.releaseDate).getTime();
 
-    return 0;
-  });
+  return 0;
+});
+
 
   const displayedCards = sortedCards.filter((card) =>
     card.name.toLowerCase().includes(searchQuery.toLowerCase()),
