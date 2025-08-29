@@ -1,7 +1,7 @@
 //src/app/api/reviews/route.ts
 
 import { NextResponse } from "next/server";
-import { getDb } from "@/lib/mongo";
+import { getDb } from "@/lib/db";
 
 type Body = {
   rating?: number;

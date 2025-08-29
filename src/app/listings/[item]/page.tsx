@@ -1,4 +1,3 @@
-
 // app/listings/[item]/page.tsx
 import SortMenu from "@/components/SortDrop";
 import FilterMenu from "@/components/FilterDrop";

@@ -32,7 +32,7 @@ export default function AccountPage() {
   const [tab, setTab] = useState<"listings" | "reviews">("listings");
   const [reviews, setReviews] = useState<ReviewProps[]>([]);
   const [reviewsLength, setReviewsLength] = useState(0);
-  
+
   const urlHandle = useMemo(() => {
     const raw = String(params?.username ?? "");
     return decodeURIComponent(raw).replace(/\s+/g, " ").trim().toLowerCase();
