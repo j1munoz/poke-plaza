@@ -1,4 +1,3 @@
-
 // src/componenets/header.tsx
 
 "use client";
@@ -14,7 +13,9 @@ export default function HeaderClient() {
     <nav className="top-nav w-full text-white p-4 flex justify-between items-center">
       <div className="text-lg font-bold">Poke Plaza</div>
       <div className="flex space-x-4 items-center">
-        <Link href="/" className="hover:underline">Home</Link>
+        <Link href="/" className="hover:underline">
+          Home
+        </Link>
 
         {loggedIn && (
           <Link
@@ -26,11 +27,16 @@ export default function HeaderClient() {
         )}
 
         {loggedIn ? (
-          <button className="hover:underline" onClick={() => signOut({ callbackUrl: "/?signedout=1" })}>
+          <button
+            className="hover:underline"
+            onClick={() => signOut({ callbackUrl: "/?signedout=1" })}
+          >
             Sign Out
           </button>
         ) : (
-          <Link href="/signin" className="hover:underline">Sign In</Link>
+          <Link href="/signin" className="hover:underline">
+            Sign In
+          </Link>
         )}
       </div>
     </nav>
@@ -88,7 +94,6 @@ export default function HeaderClient() {
 //     </nav>
 //   );
 // }
-
 
 // // src/componenets/header.tsx
 // import Link from "next/link";

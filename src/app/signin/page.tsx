@@ -12,7 +12,7 @@ export default function SignInPage() {
 
   const callbackUrl = useMemo(
     () => searchParams.get("callbackUrl") || "/",
-    [searchParams]
+    [searchParams],
   );
 
   useEffect(() => {
@@ -32,8 +32,6 @@ export default function SignInPage() {
     </main>
   );
 }
-
-
 
 // // src/app/signin/page.tsx
 // "use client";
@@ -154,4 +152,3 @@ export default function SignInPage() {
 //     </main>
 //   );
 // }
-

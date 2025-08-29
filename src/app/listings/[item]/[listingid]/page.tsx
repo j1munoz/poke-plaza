@@ -121,7 +121,6 @@ export default async function ListingDetailPage({ params }: PageProps) {
   );
 }
 
-
 // //src/app/listings/[item]/[listingid]/page.tsx
 
 // import { listingsData } from "../../../lib/mocklistings";

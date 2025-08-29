@@ -2,7 +2,7 @@
 // MongoDB connection helper (native driver). Caches the connection in dev and ensures a unique index on users.email.
 
 // src/lib/db.ts
-import { MongoClient, Db, Collection, Document } from "mongodb"
+import { MongoClient, Db, Collection, Document } from "mongodb";
 
 const uri = process.env.MONGODB_URI!;
 const dbName = process.env.MONGODB_DB || "pokeplaza";
@@ -25,7 +25,10 @@ export async function dbConnect(): Promise<Db> {
 
   await db.collection("users").createIndex(
     { username: 1 },
-    { unique: true, partialFilterExpression: { username: { $exists: true } } }
+    {
+      unique: true,
+      partialFilterExpression: { username: { $exists: true } },
+    },
   );
 
   global._mongo.client = client;
@@ -42,7 +45,7 @@ export async function getDb(name?: string): Promise<Db> {
 
 export async function getCollection<T extends Document = Document>(
   name: string,
-  databaseName?: string
+  databaseName?: string,
 ): Promise<Collection<T>> {
   const db = await getDb(databaseName);
   return db.collection<T>(name);
@@ -60,7 +63,6 @@ export const clientPromise: Promise<MongoClient> = (async () => {
 })();
 
 export default clientPromise;
-
 
 // import { MongoClient, Db, Collection, Document } from "mongodb"
 
