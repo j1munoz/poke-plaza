@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 import UserInfo from "@/components/account/userinfo";
 import { mockUsers } from "../../lib/mockuser";
 import { listingsData } from "../../lib/mocklistings";
@@ -8,14 +9,32 @@ import SellerCard from "@/components/account/sellercard";
 import ReviewCard from "@/components/account/reviewcard";
 import AddCard from "@/components/account/addlisting";
 
-interface AccountPageProps {
-  params: { username: string };
+interface ReviewProps {
+  description: string;
+  rating: number;
+  reliable: number;
+  responsive: number;
+  reviewBy: string;
+  reviewDate: string;
+  shipping: number;
 }
 
-export default function AccountPage({ params }: AccountPageProps) {
-  const { username } = params;
-
+export default function AccountPage() {
+  const { username } = useParams<{ username: string }>();
   const [tab, setTab] = useState<"listings" | "reviews">("listings");
+  const [reviews, setReviews] = useState<ReviewProps[]>([]);
+  const [reviewsLength, setReviewsLength] = useState(0);
+
+  useEffect(() => {
+    const getReviews = async () => {
+      const res = await fetch(`/api/reviews/byId/${username}`);
+      const data = await res.json();
+      setReviews(data.items);
+      setReviewsLength(data.total);
+    };
+
+    getReviews();
+  }, []);
 
   // this is so bad im so sorry
   // checks if the username in the URL matches the mock user's username
@@ -41,7 +60,7 @@ export default function AccountPage({ params }: AccountPageProps) {
           onClick={() => setTab("reviews")}
           className={`pb-2 ${tab === "reviews" ? "border-b-4 border-yellow-400 text-yellow-600 font-semibold" : "text-poke-gray-200"}`}
         >
-          Reviews ({user.reviews.length})
+          Reviews ({reviewsLength})
         </button>
       </div>
 
@@ -90,8 +109,8 @@ export default function AccountPage({ params }: AccountPageProps) {
 
         {tab === "reviews" && (
           <div>
-            {user.reviews.length > 0 ? (
-              user.reviews.map((review, index) => (
+            {reviewsLength > 0 ? (
+              reviews.map((review, index) => (
                 <ReviewCard key={index} review={review} />
               ))
             ) : (

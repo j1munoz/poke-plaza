@@ -1,11 +1,9 @@
 export interface Review {
-  username: string;
-  reviewDate: Date;
-  reviewText: string;
+  reviewBy: string;
+  reviewDate: string;
+  description: string;
   rating: number;
-  ratings: {
-    responsive: number;
-    shipping: number;
-    reliable: number;
-  };
+  responsive: number;
+  shipping: number;
+  reliable: number;
 }
