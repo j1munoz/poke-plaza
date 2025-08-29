@@ -1,3 +1,5 @@
+//src/components/account/userinfo.tsx
+
 import Image from "next/image";
 import Rating from "@/components/account/rating";
 import {
