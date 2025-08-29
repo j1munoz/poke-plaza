@@ -1,6 +1,6 @@
 // src/app/api/cards/route.ts
 import { NextResponse } from "next/server";
-import { getDb } from "@/lib/mongo";
+import { getDb } from "@/lib/db";
 
 export async function GET() {
   try {

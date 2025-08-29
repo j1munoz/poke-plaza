@@ -1,3 +1,5 @@
+//app/account/[username]/page.tsx
+
 "use client";
 
 import { useState } from "react";
@@ -6,6 +8,8 @@ import { mockUsers } from "../../lib/mockuser";
 import { listingsData } from "../../lib/mocklistings";
 import SellerCard from "@/components/account/sellercard";
 import ReviewCard from "@/components/account/reviewcard";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 interface AccountPageProps {
   params: { username: string };
@@ -25,9 +29,22 @@ export default function AccountPage({ params }: AccountPageProps) {
 
   if (!user) return <p className="text-center mt-10">User not found</p>;
 
+  const { data: session } = useSession();
+  const isOwner =
+    (session?.user?.name && session.user.name.toLowerCase() === username.toLowerCase()) ||
+    false;
+
   return (
     <div className="flex flex-col items-center bg-poke-gray-50 min-h-screen pt-10 text-poke-dark">
       <UserInfo user={user} />
+
+      {isOwner && (
+        <div className="mt-6">
+          <Link href="/listings/new" className="underline">
+            Create a new listing
+          </Link>
+        </div>
+      )}
 
       <div className="flex mt-10 w-[33vw] justify-center gap-10">
         <button

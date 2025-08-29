@@ -6,7 +6,7 @@
 //The server-side endpoint your form hits. If this breaks, the client sees 400/409/500.
 
 import { NextResponse } from "next/server";
-import { getDb } from "@/lib/mongo";
+import { getDb } from "@/lib/db";
 import bcrypt from "bcryptjs";
 
 type Body = { email?: string; password?: string; name?: string };

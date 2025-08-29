@@ -1,8 +1,10 @@
+// src/app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import AuthProvider from "@/components/providers/session-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,12 +28,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-poke-white-100 flex flex-col items-center justify-center`}
-      >
-        <Header />
-        {children}
-        <Footer />
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-poke-white-100`}>
+        <AuthProvider>
+          <Header />
+          <main className="flex flex-col items-center justify-center">
+            {children}
+          </main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );
