@@ -19,7 +19,6 @@ export default async function ItemListingsPage({
 }: {
   params: Promise<{ item: string }>;
 }) {
-
   const { item } = await params;
   const itemKey = item.toLocaleLowerCase();
 

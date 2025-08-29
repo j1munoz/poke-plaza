@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
 interface FilterMenuProps {
   filterType: "energy" | "condition" | "foil";
-  onChange: (value: string) => void; 
+  onChange: (value: string) => void;
 }
 
 export default function FilterMenu({ filterType, onChange }: FilterMenuProps) {
@@ -15,8 +15,8 @@ export default function FilterMenu({ filterType, onChange }: FilterMenuProps) {
             {filterType === "energy"
               ? "Energy Type"
               : filterType === "condition"
-              ? "Condition"
-              : "Foil Type"}
+                ? "Condition"
+                : "Foil Type"}
           </b>
         </p>
 
@@ -25,7 +25,6 @@ export default function FilterMenu({ filterType, onChange }: FilterMenuProps) {
     </div>
   );
 }
-
 
 function EnergyTypeRadios({ onChange }: { onChange: (val: string) => void }) {
   const energyTypes = [

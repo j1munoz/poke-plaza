@@ -36,15 +36,9 @@ const SellerCard = ({
   const listingUrl = `/listings/sv9-1/${id}`;
 
   return (
-
     <div className="flex justify-between bg-white rounded-xl p-5 text-black drop-shadow-2xl hover:cursor-pointer">
       <div className="flex flex-col items-center gap-4">
-        <Image
-          src={image}
-          width={300}
-          height={300}
-          alt={`${cardName} photo`}
-        />
+        <Image src={image} width={300} height={300} alt={`${cardName} photo`} />
         <p className="font-bold text-black text-3xl">${price}</p>
       </div>
       <div className="flex flex-col ml-10 mr-10 items-center justify-center gap-5">
@@ -55,16 +49,11 @@ const SellerCard = ({
         </p>
         {inStock ? (
           <p className="bg-poke-green-100 text-poke-green-200 text-xl px-7 py-2 rounded-xl">
-            <Link href={listingUrl}>
-              In Stock
-            </Link>
-            
+            <Link href={listingUrl}>In Stock</Link>
           </p>
         ) : (
           <p className="bg-poke-red-100 text-poke-red-200 text-xl px-7 py-2 rounded-xl">
-
-              Sold Out
-
+            Sold Out
           </p>
         )}
         <div className="flex gap-5">
@@ -121,7 +110,6 @@ const SellerCard = ({
         </div>
       </div>
     </div>
-
   );
 };
 

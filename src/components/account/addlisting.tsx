@@ -1,6 +1,3 @@
-import Image from "next/image";
-import { FiEdit } from "react-icons/fi";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import {
   Dialog,
   DialogTrigger,

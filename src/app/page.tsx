@@ -24,11 +24,14 @@ export type CardSummary = {
 export default function Home() {
   const [cards, setCards] = useState<CardSummary[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState(""); 
-  const [priceFilter, setPriceFilter] = useState<"high-to-low" | "low-to-high" | "none">("none");
-  const [dateFilter, setDateFilter] = useState<"newest" | "oldest" | "none">("none");
+  const [filter, setFilter] = useState("");
+  const [priceFilter, setPriceFilter] = useState<
+    "high-to-low" | "low-to-high" | "none"
+  >("none");
+  const [dateFilter, setDateFilter] = useState<"newest" | "oldest" | "none">(
+    "none",
+  );
   const [searchQuery, setSearchQuery] = useState("");
-
 
   useEffect(() => {
     const fetchCards = async () => {
@@ -44,10 +47,8 @@ export default function Home() {
 
   const filteredCards = filter
     ? cards.filter((card) =>
-      card.types?.some(
-        (t) => t.toLowerCase() === filter.toLowerCase()
+        card.types?.some((t) => t.toLowerCase() === filter.toLowerCase()),
       )
-    )
     : cards;
 
   const sortedCards = [...filteredCards].sort((a, b) => {
@@ -75,9 +76,8 @@ export default function Home() {
   });
 
   const displayedCards = sortedCards.filter((card) =>
-    card.name.toLowerCase().includes(searchQuery.toLowerCase())
+    card.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
-
 
   return (
     <div className="font-sans min-h-screen flex flex-col items-center w-full ">
@@ -111,7 +111,6 @@ export default function Home() {
             className="flex-grow bg-transparent focus:outline-none px-2 text-gray-700 placeholder-gray-400"
           />
 
-
           <button className="bg-yellow-400 hover:bg-yellow-500 text-white rounded-full p-2 transition">
             <Image src="/search-icon.png" alt="Search" width={20} height={20} />
           </button>
@@ -126,14 +125,12 @@ export default function Home() {
             if (name === "priceFilter") {
               setPriceFilter(value as "high-to-low" | "low-to-high");
               setDateFilter("none"); // disable date filter
-
             } else if (name === "dateFilter") {
               setDateFilter(value as "newest" | "oldest");
               setPriceFilter("none"); // disable price filter
             }
           }}
         />
-
       </div>
 
       <div
@@ -152,7 +149,8 @@ export default function Home() {
               price={card.averageSellPrice}
               cardId={card.cardId}
             />
-          )))}
+          ))
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import RadioGroup from "./RadioGroup";
 
@@ -8,7 +8,7 @@ interface SortMenuProps {
   onChange: (name: "priceFilter" | "dateFilter", value: string) => void;
 }
 
-export default function SortMenu({ priceFilter, dateFilter, onChange }: SortMenuProps) {
+export default function SortMenu({ priceFilter, onChange }: SortMenuProps) {
   return (
     <div className="dropdown flex ml-4 mb-8">
       <button className="dropbtn whitespace-nowrap">Sort By ▼</button>
@@ -34,6 +34,5 @@ export default function SortMenu({ priceFilter, dateFilter, onChange }: SortMenu
         />
       </div>
     </div>
-
   );
 }

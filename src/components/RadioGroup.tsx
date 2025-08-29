@@ -8,10 +8,16 @@ interface RadioGroupItems {
   title: string;
   options: RadioOption[];
   selectedValue?: string;
-  onChange?: (value: string) => void; 
+  onChange?: (value: string) => void;
 }
 
-export default function RadioGroup({ name, title, options, selectedValue, onChange }: RadioGroupItems) {
+export default function RadioGroup({
+  name,
+  title,
+  options,
+  selectedValue,
+  onChange,
+}: RadioGroupItems) {
   return (
     <>
       <p className="bg-[#21386E] text-white px-4 py-2 font-semibold">{title}</p>
