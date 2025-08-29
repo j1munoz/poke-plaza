@@ -61,7 +61,7 @@ export default function AccountPage() {
     };
 
     getReviews();
-  }, []);
+  }, [params]);
 
   const mockUser =
     mockUsers.find((u) => u.username.toLowerCase() === urlHandle) || null;

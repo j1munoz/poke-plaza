@@ -1,5 +1,5 @@
 // src/auth.ts
-import NextAuth, { type AuthConfig } from "next-auth";
+import NextAuth, { type NextAuthConfig } from "next-auth";
 import Google from "next-auth/providers/google";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/lib/db";
@@ -10,7 +10,7 @@ import type { AdapterUser } from "next-auth/adapters";
 
 type TokenWithExtras = JWT & { id?: string; username?: string | null };
 
-const authConfig: AuthConfig = {
+const authConfig: NextAuthConfig = {
   adapter: MongoDBAdapter(clientPromise),
   session: { strategy: "jwt" },
   secret: process.env.AUTH_SECRET,
@@ -57,8 +57,8 @@ const authConfig: AuthConfig = {
     }): Promise<Session> {
       const t = token as TokenWithExtras;
       if (session.user) {
-        (session.user as any).id = t.id ?? undefined;
-        (session.user as any).username = t.username ?? null;
+        (session.user as any).id = t.id ?? undefined; // eslint-disable-line @typescript-eslint/no-explicit-any
+        (session.user as any).username = t.username ?? null; // eslint-disable-line @typescript-eslint/no-explicit-any
       }
       return session;
     },
@@ -66,9 +66,7 @@ const authConfig: AuthConfig = {
   debug: process.env.NODE_ENV !== "production",
 };
 
-// Call NextAuth once, then export the pieces you need:
 const authResult = NextAuth(authConfig);
 
 export const { auth, signIn, signOut } = authResult;
-// Export GET/POST directly so the route can re-export them
 export const { GET, POST } = authResult.handlers;

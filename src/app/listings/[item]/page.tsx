@@ -1,8 +1,8 @@
 // app/listings/[item]/page.tsx
-import SortMenu from "@/components/SortDrop";
-import FilterMenu from "@/components/FilterDrop";
-import { getDb } from "@/lib/db";
-import Image from "next/image";
+// import SortMenu from "@/components/SortDrop";
+// import FilterMenu from "@/components/FilterDrop";
+// import { getDb } from "@/lib/db";
+// import Image from "next/image";
 import { listingsData } from "../../lib/mocklistings";
 import Link from "next/link";
 
