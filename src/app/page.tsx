@@ -18,11 +18,20 @@ export type CardSummary = {
   releaseDate: string;
   number: string;
   averageSellPrice: number | null;
+  types?: string[];
 };
 
 export default function Home() {
   const [cards, setCards] = useState<CardSummary[]>([]);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState("");
+  const [priceFilter, setPriceFilter] = useState<
+    "high-to-low" | "low-to-high" | "none"
+  >("none");
+  const [dateFilter, setDateFilter] = useState<"newest" | "oldest" | "none">(
+    "none",
+  );
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchCards = async () => {
@@ -35,6 +44,34 @@ export default function Home() {
 
     fetchCards();
   }, []);
+
+  const filteredCards = filter
+    ? cards.filter((card) =>
+        card.types?.some((t) => t.toLowerCase() === filter.toLowerCase()),
+      )
+    : cards;
+
+  const sortedCards = [...filteredCards].sort((a, b) => {
+    if (priceFilter === "high-to-low")
+      return (b.averageSellPrice ?? 0) - (a.averageSellPrice ?? 0);
+    if (priceFilter === "low-to-high")
+      return (a.averageSellPrice ?? 0) - (b.averageSellPrice ?? 0);
+
+    if (dateFilter === "newest")
+      return (
+        new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime()
+      );
+    if (dateFilter === "oldest")
+      return (
+        new Date(a.releaseDate).getTime() - new Date(b.releaseDate).getTime()
+      );
+
+    return 0;
+  });
+
+  const displayedCards = sortedCards.filter((card) =>
+    card.name.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
 
   return (
     <div className="font-sans min-h-screen flex flex-col items-center w-full ">
@@ -63,32 +100,42 @@ export default function Home() {
           <input
             type="text"
             placeholder="Search..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="flex-grow bg-transparent focus:outline-none px-2 text-gray-700 placeholder-gray-400"
           />
+
           <button className="bg-yellow-400 hover:bg-yellow-500 text-white rounded-full p-2 transition">
             <Image src="/search-icon.png" alt="Search" width={20} height={20} />
           </button>
         </div>
 
-        <FilterMenu filterType={"energy"} />
+        <FilterMenu filterType="energy" onChange={setFilter} />
 
-        <SortMenu />
+        <SortMenu
+          priceFilter={priceFilter}
+          dateFilter={dateFilter}
+          onChange={(name, value) => {
+            if (name === "priceFilter") {
+              setPriceFilter(value as "high-to-low" | "low-to-high");
+              setDateFilter("none"); // disable date filter
+            } else if (name === "dateFilter") {
+              setDateFilter(value as "newest" | "oldest");
+              setPriceFilter("none"); // disable price filter
+            }
+          }}
+        />
       </div>
-
-      {/* Card Section 
-      
-      Should be replaced with dynamic content from database in the future, currently hardcoded for layout purposes.
-      using .map? I think?
-      
-      */}
 
       <div
         className="grid gap-6 justify-center"
         style={{ gridTemplateColumns: "repeat(3, 350px)" }}
       >
         {loading && <p>Loading cards...</p>}
-        {cards &&
-          cards.map((card, index) => (
+        {displayedCards.length === 0 && !loading ? (
+          <p>Nothing to catch here!</p>
+        ) : (
+          displayedCards.map((card, index) => (
             <Card
               key={index}
               image={card.image}
@@ -96,7 +143,8 @@ export default function Home() {
               price={card.averageSellPrice}
               cardId={card.cardId}
             />
-          ))}
+          ))
+        )}
       </div>
     </div>
   );

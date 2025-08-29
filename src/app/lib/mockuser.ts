@@ -12,8 +12,8 @@ export const mockUsers: UserAccount[] = [
       reliable: 4,
     },
     uploadedListingIds: [
-      { card: "klefki", listingId: "alice-001", soldby: "Alice123" },
-      { card: "klefki", listingId: "alice-002", soldby: "Alice123" },
+      { card: "sv9-1", listingId: "alice-001", soldby: "Alice123" },
+      { card: "sv9-1", listingId: "alice-002", soldby: "Alice123" },
     ],
     reviews: [
       {
