@@ -17,11 +17,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
-    // Put id and username onto the token
     async jwt({ token, user }: any) {
       if (user?.id) token.id = user.id as string;
 
-      // Load username once per session (first time jwt runs)
       if (token?.id && token.username === undefined) {
         try {
           const db = (await clientPromise).db();
@@ -36,7 +34,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
       return token;
     },
-    // Expose id + username on the session object used by your UI
     async session({ session, token }: any) {
       if (session.user && token?.id) {
         (session.user as any).id = token.id;

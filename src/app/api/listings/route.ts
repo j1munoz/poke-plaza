@@ -34,6 +34,5 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Cannot purchase your own listing" }, { status: 403 });
   }
 
-  // TODO: create order, charge, mark listing, etc.
   return NextResponse.json({ ok: true });
 }

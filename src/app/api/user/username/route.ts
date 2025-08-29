@@ -31,7 +31,7 @@ export async function PATCH(req: Request) {
     }
     return NextResponse.json({ ok: true });
   } catch (e: any) {
-    // 11000 = duplicate key error on unique index
+    
     if (e?.code === 11000) {
       return NextResponse.json({ error: "Username already taken" }, { status: 409 });
     }

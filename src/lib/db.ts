@@ -8,7 +8,6 @@ const uri = process.env.MONGODB_URI!;
 const dbName = process.env.MONGODB_DB || "pokeplaza";
 
 declare global {
-  // eslint-disable-next-line no-var
   var _mongo: { client?: MongoClient; db?: Db } | undefined;
 }
 
@@ -24,7 +23,6 @@ export async function dbConnect(): Promise<Db> {
 
   await db.collection("users").createIndex({ email: 1 }, { unique: true });
 
-  // NEW: username must be unique only when present
   await db.collection("users").createIndex(
     { username: 1 },
     { unique: true, partialFilterExpression: { username: { $exists: true } } }
