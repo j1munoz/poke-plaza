@@ -1,6 +1,3 @@
-// src/components/account/editlisting.tsx
-
-// src/components/account/editlisting.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -69,7 +66,10 @@ export default function EditListing({
         const data = text ? (JSON.parse(text) as LoadedListing) : null;
 
         if (!res.ok || !data) {
-          alert((data as any)?.error ?? "Failed to load listing.");
+          alert(
+            (data as unknown as { error?: string })?.error ??
+              "Failed to load listing.",
+          );
           onOpenChange(false);
           return;
         }
@@ -116,20 +116,18 @@ export default function EditListing({
         body: JSON.stringify(payload),
       });
 
-      // Be tolerant of empty bodies
       const text = await res.text();
-      const data = text ? JSON.parse(text) : null;
+      type PatchResp = { ok?: boolean; error?: string } | null;
+      const data: PatchResp = text ? JSON.parse(text) : null;
 
-      if (!res.ok || (data && data.ok === false)) {
+      if (!res.ok || data?.ok === false) {
         alert(data?.error ?? `Failed to update listing (${res.status}).`);
         return;
       }
 
       onOpenChange(false);
-
-      // ✅ immediately refresh page data and notify parent list to re-fetch
-      router.refresh();
-      onUpdated?.();
+      router.refresh(); // refresh server components
+      onUpdated?.(); // ask parent to re-fetch client state
     } finally {
       setSaving(false);
     }

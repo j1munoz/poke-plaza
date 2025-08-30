@@ -1,5 +1,3 @@
-// src/app/api/listings/[id]/route.ts
-// src/app/api/listings/[id]/route.ts
 export const dynamic = "force-dynamic";
 
 import { NextResponse } from "next/server";
@@ -87,7 +85,7 @@ export async function PATCH(
     $set.price = p;
   }
   if (body.condition !== undefined) {
-    const ok = [
+    const allowed = [
       "Mint",
       "Near Mint",
       "Excellent",
@@ -95,9 +93,11 @@ export async function PATCH(
       "Light Played",
       "Played",
       "Poor",
-    ].includes(body.condition as any);
-    if (!ok)
+    ] as const;
+    type Allowed = (typeof allowed)[number];
+    if (!allowed.includes(body.condition as Allowed)) {
       return NextResponse.json({ error: "Invalid condition" }, { status: 400 });
+    }
     $set.condition = body.condition;
   }
   if (body.description !== undefined) {
@@ -118,14 +118,14 @@ export async function PATCH(
   const db = await getDb();
 
   // v6 returns the document (or null) by default.
-  // If you want ModifyResult with `.value`, pass: { includeResultMetadata: true }.
-  const updatedDoc = await db.collection("listings").findOneAndUpdate(
-    { _id: new ObjectId(id), ownerId: new ObjectId(session.user.id) },
-    { $set },
-    { returnDocument: "after" }, // add includeResultMetadata: true to get ModifyResult
-  );
+  const updatedDoc = await db
+    .collection("listings")
+    .findOneAndUpdate(
+      { _id: new ObjectId(id), ownerId: new ObjectId(session.user.id) },
+      { $set },
+      { returnDocument: "after" },
+    );
 
-  // When includeResultMetadata is NOT set, updatedDoc is WithId<Document> | null
   if (!updatedDoc) {
     return NextResponse.json(
       { error: "Not found or forbidden" },

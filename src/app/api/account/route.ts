@@ -6,9 +6,9 @@ import { auth } from "@/auth";
 import { getDb } from "@/lib/db";
 import { ObjectId } from "mongodb";
 
-type RouteParams = Promise<Record<string, never>>; // no params here
+// type RouteParams = Promise<Record<string, never>>; // no params here
 
-export async function DELETE(_req: Request, _ctx: { params: RouteParams }) {
+export async function DELETE() {
   const session = await auth();
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

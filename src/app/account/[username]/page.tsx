@@ -16,7 +16,7 @@ import { mockUsers } from "../../lib/mockuser";
 import SellerCard from "@/components/account/sellercard";
 import ReviewCard from "@/components/account/reviewcard";
 import AddCard from "@/components/account/addlisting";
-import DeleteAccount from "@/components/account/deleteaccount"; // ⬅️ NEW
+// import DeleteAccount from "@/components/account/deleteaccount";
 
 type ListingOut = {
   id: string;

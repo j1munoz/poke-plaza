@@ -1,5 +1,3 @@
-//src/components/account/userinfo.tsx
-
 "use client";
 
 import { useState } from "react";
@@ -54,11 +52,18 @@ export default function UserInfo({ user }: UserInfoProps) {
     try {
       setDeleting(true);
       const res = await fetch("/api/account", { method: "DELETE" });
+
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}) as any);
+        let data: { error?: string } | undefined;
+        try {
+          data = (await res.json()) as { error?: string };
+        } catch {
+          data = undefined;
+        }
         alert(data?.error ?? "Failed to delete account.");
         return;
       }
+
       setManageOpen(false);
       await signOut({ callbackUrl: "/" });
     } finally {
@@ -103,7 +108,7 @@ export default function UserInfo({ user }: UserInfoProps) {
             </DialogHeader>
 
             <div className="flex flex-col gap-4 p-4">
-              {/* Change Password: nested dialog with a full working form */}
+              {/* Change Password: nested dialog with a working form */}
               <Dialog>
                 <DialogTrigger asChild>
                   <button className="bg-gray-200 hover:bg-gray-300 text-black px-4 py-2 rounded">
@@ -197,10 +202,11 @@ function ChangePasswordForm() {
       });
 
       const text = await res.text();
-      const data = text ? JSON.parse(text) : null;
+      type PasswordResp = { ok?: boolean; error?: string } | null;
+      const data: PasswordResp = text ? JSON.parse(text) : null;
 
-      if (!res.ok || (data && data.ok === false)) {
-        setError((data?.error as string) ?? `Failed (${res.status}).`);
+      if (!res.ok || data?.ok === false) {
+        setError(data?.error ?? `Failed (${res.status}).`);
         return;
       }
 
