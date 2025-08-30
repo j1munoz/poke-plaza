@@ -1,36 +1,124 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PokePlaza
 
-## Getting Started
+A Next.js (App Router) app with email/password **signup** and **NextAuth** authentication (Google OAuth + Credentials) backed by **MongoDB**.
 
-First, run the development server:
+## Features
+
+* Email/password **signup** via `/api/auth/signup` (hashes password and stores user in MongoDB)
+* **Sign in with Google** (`next-auth` Google provider)
+* **Credentials sign-in** (email + password)
+* Ready-to-use pages at `/signup` and `/signin`
+
+---
+
+## Prerequisites
+
+* **Node.js 18.17+** (or Node 20+)
+* **npm**, **pnpm**, or **yarn**
+* **MongoDB** (Atlas or local)
+
+---
+
+## Quick Start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# 1) Clone
+git clone https://github.com/j1munoz/poke-plaza.git
+cd https://github.com/j1munoz/poke-plaza.git
+
+# 2) Install dependencies (choose one)
+npm install
+
+# 3) Configure environment variables
+# If an example file exists:
+# cp .env.local.example .env.local
+# Otherwise, create .env.local (see "Environment Variables" below)
+
+# 4) Run the dev server
+pnpm dev        # or: npm run dev / yarn dev
+
+# 5) Open the app
+# http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a file named **`.env.local`** in the project root with, fill in with your info :
 
-## Learn More
+```dotenv
+# Mongo
+MONGODB_URI="<your-mongodb-connection-string>"
+MONGODB_DB="pokeplaza"
 
-To learn more about Next.js, take a look at the following resources:
+# NextAuth / App
+NEXTAUTH_URL="http://localhost:3000"
+AUTH_SECRET="<a-long-random-string>"
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Google OAuth
+GOOGLE_CLIENT_ID="<your-google-client-id>"
+GOOGLE_CLIENT_SECRET="<your-google-client-secret>"
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+JWT_SECRET="<a-long-random-string>"
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Google OAuth Setup (NextAuth)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Go to **Google Cloud Console** → APIs & Services → **Credentials**.
+2. Create **OAuth 2.0 Client ID** of type **Web application**.
+3. Add this **Authorized redirect URI**:
+
+   ```
+   http://localhost:3000/api/auth/callback/google
+   ```
+4. Put the resulting `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` into `.env.local`.
+5. Ensure `NEXTAUTH_URL` matches your dev URL and set a strong `AUTH_SECRET`.
+
+---
+
+## Scripts
+
+```bash
+# Development
+npm run dev
+
+# Production build
+npm run build
+
+# Run the production build locally
+npm start
+```
+
+---
+
+## Useful URLs
+
+* **Signin:** `http://localhost:3000/signin`
+
+---
+
+## High Level View
+
+* **/signup** posts `{ email, password, name? }` to **`/api/auth/signup`**.
+  The API validates input, checks for an existing user, hashes the password with `bcrypt`, inserts the user, and responds with `{ ok: true, redirect: "/signin" }`.
+* **/signin** supports:
+
+  * **Google**: `signIn("google")`
+  * **Credentials**: `signIn("credentials", { email, password })`
+
+---
+
+## Troubleshooting
+
+* **“Invalid credentials” on sign-in**
+  Verify the user exists in MongoDB and the password is correct. Double-check `MONGODB_URI`/`MONGODB_DB`.
+
+* **“Email already in use” on signup**
+  The API checks for an existing email before insert—use a new email or remove the existing document.
+
+* **Google OAuth error**
+  Ensure the redirect URI exactly matches
+  `http://localhost:3000/api/auth/callback/google`, and that `NEXTAUTH_URL`, `GOOGLE_CLIENT_ID`, and `GOOGLE_CLIENT_SECRET` are set correctly.
