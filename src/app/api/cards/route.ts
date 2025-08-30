@@ -1,4 +1,10 @@
 // src/app/api/cards/route.ts
+
+/*
+
+Grabs a list of all cards
+
+*/
 import { NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
 
