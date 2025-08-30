@@ -16,6 +16,7 @@ import { mockUsers } from "../../lib/mockuser";
 import SellerCard from "@/components/account/sellercard";
 import ReviewCard from "@/components/account/reviewcard";
 import AddCard from "@/components/account/addlisting";
+import DeleteAccount from "@/components/account/deleteaccount"; // ⬅️ NEW
 
 type ListingOut = {
   id: string;
@@ -143,8 +144,10 @@ export default function AccountPage() {
       <UserInfo user={user} />
 
       {isOwner && (
-        <div className="mt-6">
+        <div className="mt-6 flex items-center gap-4">
           <AddCard onCreated={() => reloadListings(urlHandle)} />
+          {/* Danger zone */}
+          <DeleteAccount />
         </div>
       )}
 
@@ -189,9 +192,8 @@ export default function AccountPage() {
                     datePosted={datePosted}
                     inStock={true}
                     id={l.id}
-                    // ✅ immediately re-fetch the list after edit or delete
-                    onUpdated={() => reloadListings(urlHandle)}
-                    onDeleted={() => reloadListings(urlHandle)}
+                    onUpdated={() => reloadListings(urlHandle)} // refresh after edit
+                    onDeleted={() => reloadListings(urlHandle)} // refresh after delete
                   />
                 );
               })
@@ -220,6 +222,7 @@ export default function AccountPage() {
     </div>
   );
 }
+
 
 
 // "use client";
