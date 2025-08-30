@@ -1,11 +1,12 @@
 // src/app/api/listings/route.ts
-export const dynamic = "force-dynamic";
 
 /*
 
 This grabs listings for a specific user based on their username.
 
 */
+
+export const dynamic = "force-dynamic";
 
 import { NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
@@ -28,6 +29,7 @@ type CreateListingBody = {
   description: string;
   images: string[];
 };
+
 
 // GET /api/listings?username=<handle>
 export async function GET(req: Request) {
@@ -57,25 +59,6 @@ export async function GET(req: Request) {
   return NextResponse.json(items);
 }
 
-import { auth } from "@/auth";
-import { ObjectId } from "mongodb";
-
-type ListingCondition =
-  | "Mint"
-  | "Near Mint"
-  | "Excellent"
-  | "Good"
-  | "Light Played"
-  | "Played"
-  | "Poor";
-
-type CreateListingBody = {
-  cardNumber: number;
-  price: number;
-  condition: ListingCondition;
-  description: string;
-  images: string[]; 
-};
 
 export async function POST(req: Request) {
   const session = await auth();
