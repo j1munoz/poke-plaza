@@ -1,3 +1,4 @@
+// src/components/account/sellercard.tsx
 import Image from "next/image";
 import Link from "next/link";
 import { FiEdit } from "react-icons/fi";
@@ -23,17 +24,19 @@ interface SellerCardProps {
   id: string;
 }
 
-const SellerCard = ({
+export default function SellerCard({
   image,
   price,
   cardName,
   datePosted,
   inStock,
-  id,
-}: SellerCardProps) => {
-  // Construct the URL by formatting the cardName
-  // const formattedCardName = cardName.toLowerCase().replace(/\s+/g, "-");
-  const listingUrl = `/listings/sv9-1/${id}`;
+  id: listingId, // <-- alias so we’re sure it exists in this scope
+}: SellerCardProps) {
+  // If you kept Option A (old mock route), point to it (only works for mock data):
+  // const listingUrl = `/listings/sv9-1/${listingId}`;
+
+  // If you chose Option B (new DB route), point to the singular page:
+  const listingUrl = `/listing/${listingId}`;
 
   return (
     <div className="flex justify-between bg-white rounded-xl p-5 text-black drop-shadow-2xl hover:cursor-pointer">
@@ -111,6 +114,4 @@ const SellerCard = ({
       </div>
     </div>
   );
-};
-
-export default SellerCard;
+}

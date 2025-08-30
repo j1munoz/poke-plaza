@@ -1,50 +1,35 @@
-// app/listings/[item]/page.tsx
-// import SortMenu from "@/components/SortDrop";
-// import FilterMenu from "@/components/FilterDrop";
-// import { getDb } from "@/lib/db";
-// import Image from "next/image";
 import { listingsData } from "../../lib/mocklistings";
 import Link from "next/link";
 
-export type CardSummary = {
-  _id: string;
-  cardId: string;
-  name: string;
-  setName: string;
-  setSeries: string;
-  image: string;
-  releaseDate: string;
-  number: string;
-  averageSellPrice: number | null;
-  types?: string[];
-};
+import Image from "next/image";
 
 export default async function ItemListingsPage({
   params,
 }: {
-  params: Promise<{ item: string }>;
+  params: { item: string };
 }) {
-  const { item } = await params;
-  const itemKey = item.toLocaleLowerCase();
+  const { item } = params;
+  const itemKey = item.toLowerCase();
 
   const itemData = listingsData[itemKey as keyof typeof listingsData];
-
-  if (!itemData) {
-    return <p>No listings found for {itemKey}</p>;
-  }
+  if (!itemData) return <p>No listings found for {itemKey}</p>;
 
   const { title, listings, cardnumber, releasedate, set } = itemData;
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center p-6 ml-40 mr-40">
-      {/* Title */}
       <h1 className="text-4xl font-bold mb-8">{title}</h1>
 
-      {/* Content */}
       <div className="flex flex-col md:flex-row gap-8">
-        {/* Left: Card Image & Info */}
         <div className="bg-white shadow rounded-lg p-4 w-100">
-          <img src={listings[0].image} alt={title} className="mb-2 rounded" />
+          <Image
+            src={listings[0].image}
+            alt={title}
+            width={600}
+            height={600}
+            className="mb-2 rounded"
+            priority
+          />
           <div className="text-center mt-4">
             <p className="text-gray-800 font-semibold">#{cardnumber}</p>
             <p className="text-gray-600">{set}</p>
@@ -52,7 +37,6 @@ export default async function ItemListingsPage({
           </div>
         </div>
 
-        {/* Right: Listings */}
         <div className="flex flex-col gap-4">
           {listings.map((listing) => (
             <div
@@ -65,7 +49,7 @@ export default async function ItemListingsPage({
                   Sold by {listing.user} — Condition: {listing.condition}
                 </p>
               </div>
-              <Link href={`/listings/${itemKey}/${listing.id}`} passHref>
+              <Link href={`/listings/${itemKey}/${listing.id}`}>
                 <button className="bg-yellow-400 text-white font-semibold px-4 py-2 rounded hover:bg-yellow-500 transition">
                   View Card
                 </button>
