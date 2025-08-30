@@ -1,4 +1,6 @@
 // src/app/account/[username]/page.tsx
+
+// src/app/account/[username]/page.tsx
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
@@ -14,6 +16,7 @@ import { mockUsers } from "../../lib/mockuser";
 import SellerCard from "@/components/account/sellercard";
 import ReviewCard from "@/components/account/reviewcard";
 import AddCard from "@/components/account/addlisting";
+// import DeleteAccount from "@/components/account/deleteaccount";
 
 type ListingOut = {
   id: string;
@@ -187,6 +190,8 @@ export default function AccountPage() {
                     datePosted={datePosted}
                     inStock={true}
                     id={l.id}
+                    onUpdated={() => reloadListings(urlHandle)} // refresh after edit
+                    onDeleted={() => reloadListings(urlHandle)} // refresh after delete
                   />
                 );
               })
