@@ -51,7 +51,9 @@ export default function SellerCard({
   const handleDelete = async () => {
     try {
       setDeleting(true);
-      const res = await fetch(`/api/listings/${listingId}`, { method: "DELETE" });
+      const res = await fetch(`/api/listings/${listingId}`, {
+        method: "DELETE",
+      });
       const text = await res.text();
       const data = text ? JSON.parse(text) : null;
 
@@ -129,7 +131,8 @@ export default function SellerCard({
               <DialogHeader>
                 <DialogTitle>Remove Listing</DialogTitle>
                 <DialogDescription>
-                  Are you sure you want to delete this listing? This action cannot be undone.
+                  Are you sure you want to delete this listing? This action
+                  cannot be undone.
                 </DialogDescription>
               </DialogHeader>
 

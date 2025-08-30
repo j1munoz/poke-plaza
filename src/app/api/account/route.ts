@@ -31,14 +31,17 @@ export async function DELETE(_req: Request, _ctx: { params: RouteParams }) {
 
   // Reviews where you were seller or author (your schema may use soldBy / soldby, reviewBy / reviewby)
   ops.push(
-    db.collection("reviews").deleteMany({
-      $or: [
-        { soldBy: handle },
-        { soldby: handle },
-        { reviewBy: handle },
-        { reviewby: handle },
-      ],
-    }).catch(() => undefined) // in case the collection doesn't exist
+    db
+      .collection("reviews")
+      .deleteMany({
+        $or: [
+          { soldBy: handle },
+          { soldby: handle },
+          { reviewBy: handle },
+          { reviewby: handle },
+        ],
+      })
+      .catch(() => undefined), // in case the collection doesn't exist
   );
 
   // Finally, delete user

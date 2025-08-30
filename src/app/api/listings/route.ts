@@ -115,7 +115,6 @@ export async function POST(req: Request) {
   return NextResponse.json({ id: res.insertedId.toString() }, { status: 201 });
 }
 
-
 // export const dynamic = "force-dynamic"; // no caching
 
 // import { NextResponse } from "next/server";
@@ -147,7 +146,6 @@ export async function POST(req: Request) {
 
 //   return NextResponse.json(items);
 // }
-
 
 // import { auth } from "@/auth";
 // import { ObjectId } from "mongodb";

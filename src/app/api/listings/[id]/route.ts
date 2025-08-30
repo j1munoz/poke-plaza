@@ -19,7 +19,9 @@ export async function GET(_req: Request, { params }: { params: RouteParams }) {
   if (!ObjectId.isValid(id)) return invalidId();
 
   const db = await getDb();
-  const doc = await db.collection("listings").findOne({ _id: new ObjectId(id) });
+  const doc = await db
+    .collection("listings")
+    .findOne({ _id: new ObjectId(id) });
   if (!doc) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
   return NextResponse.json({
@@ -72,7 +74,10 @@ export async function PATCH(
   if (body.cardNumber !== undefined) {
     const n = Number(body.cardNumber);
     if (!Number.isFinite(n) || n <= 0)
-      return NextResponse.json({ error: "Invalid cardNumber" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Invalid cardNumber" },
+        { status: 400 },
+      );
     $set.cardNumber = n;
   }
   if (body.price !== undefined) {
@@ -97,7 +102,10 @@ export async function PATCH(
   }
   if (body.description !== undefined) {
     if (typeof body.description !== "string" || !body.description.trim())
-      return NextResponse.json({ error: "Invalid description" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Invalid description" },
+        { status: 400 },
+      );
     $set.description = body.description;
   }
   if (body.images !== undefined) {
@@ -114,19 +122,25 @@ export async function PATCH(
   const updatedDoc = await db.collection("listings").findOneAndUpdate(
     { _id: new ObjectId(id), ownerId: new ObjectId(session.user.id) },
     { $set },
-    { returnDocument: "after" } // add includeResultMetadata: true to get ModifyResult
+    { returnDocument: "after" }, // add includeResultMetadata: true to get ModifyResult
   );
 
   // When includeResultMetadata is NOT set, updatedDoc is WithId<Document> | null
   if (!updatedDoc) {
-    return NextResponse.json({ error: "Not found or forbidden" }, { status: 404 });
+    return NextResponse.json(
+      { error: "Not found or forbidden" },
+      { status: 404 },
+    );
   }
 
   return NextResponse.json({ ok: true, id });
 }
 
 /* DELETE /api/listings/:id  (owner only) */
-export async function DELETE(_req: Request, { params }: { params: RouteParams }) {
+export async function DELETE(
+  _req: Request,
+  { params }: { params: RouteParams },
+) {
   const session = await auth();
   if (!session?.user?.id) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -142,12 +156,14 @@ export async function DELETE(_req: Request, { params }: { params: RouteParams })
   });
 
   if (!res.deletedCount) {
-    return NextResponse.json({ error: "Not found or forbidden" }, { status: 404 });
+    return NextResponse.json(
+      { error: "Not found or forbidden" },
+      { status: 404 },
+    );
   }
 
   return NextResponse.json({ ok: true, id });
 }
-
 
 // export const dynamic = "force-dynamic";
 

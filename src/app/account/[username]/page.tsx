@@ -144,10 +144,10 @@ export default function AccountPage() {
       <UserInfo user={user} />
 
       {isOwner && (
-  <div className="mt-6">
-    <AddCard onCreated={() => reloadListings(urlHandle)} />
-  </div>
-)}
+        <div className="mt-6">
+          <AddCard onCreated={() => reloadListings(urlHandle)} />
+        </div>
+      )}
 
       <div className="flex mt-10 w-[33vw] justify-center gap-10">
         <button
@@ -220,8 +220,6 @@ export default function AccountPage() {
     </div>
   );
 }
-
-
 
 // "use client";
 
