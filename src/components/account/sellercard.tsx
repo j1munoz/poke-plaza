@@ -30,12 +30,8 @@ export default function SellerCard({
   cardName,
   datePosted,
   inStock,
-  id: listingId, // <-- alias so we’re sure it exists in this scope
+  id: listingId, 
 }: SellerCardProps) {
-  // If you kept Option A (old mock route), point to it (only works for mock data):
-  // const listingUrl = `/listings/sv9-1/${listingId}`;
-
-  // If you chose Option B (new DB route), point to the singular page:
   const listingUrl = `/listing/${listingId}`;
 
   return (

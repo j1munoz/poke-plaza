@@ -13,7 +13,6 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 
-// Define the structure of a review, matching mockuser.tsx
 export interface Review {
   username: string;
   reviewDate: Date;
@@ -26,14 +25,12 @@ export interface Review {
   };
 }
 
-// Update the type for uploaded listings to include the parent card ID
 export interface UploadedListing {
   card: string;
   listingId: string;
   soldby: string;
 }
 
-// Define the structure of a user account, matching mockuser.tsx
 export interface UserAccount {
   username: string;
   joinedOn: string;
