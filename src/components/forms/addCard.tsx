@@ -1,3 +1,5 @@
+//src/components/forms/addCard.tsx
+
 "use client";
 
 import { useState } from "react";
@@ -10,8 +12,6 @@ const AddCardForm = () => {
   const [state, setState] = useState(0);
 
   const onSubmit = async () =>
-    // setLoading: (value: boolean) => void,
-    // setState: (value: number) => void,
     {
       console.log("Form submitted:", info, state);
     };
